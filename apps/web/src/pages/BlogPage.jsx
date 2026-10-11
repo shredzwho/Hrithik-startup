@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import pb from '@/lib/pocketbaseClient.js';
 import { LoadingSpinner } from '@/components/SharedComponents.jsx';
+import { FALLBACK_BLOG_POSTS } from '@/data/blogFallback.js';
 
 const BlogPage = () => {
   const [posts, setPosts] = useState([]);
@@ -10,8 +11,17 @@ const BlogPage = () => {
 
   useEffect(() => {
     pb.collection('blog_posts').getFullList({ sort: '-publish_date', $autoCancel: false })
-      .then(res => setPosts(res))
-      .catch(console.error)
+      .then(res => {
+        if (res && res.length > 0) {
+          setPosts(res);
+        } else {
+          setPosts(FALLBACK_BLOG_POSTS);
+        }
+      })
+      .catch((err) => {
+        console.warn('PocketBase fetch failed, using fallback articles:', err);
+        setPosts(FALLBACK_BLOG_POSTS);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -33,29 +43,32 @@ const BlogPage = () => {
         {loading ? <LoadingSpinner /> : (
           posts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map(post => (
-                <Link key={post.id} to={`/blog/${post.slug}`} className="luxury-card rounded-lg overflow-hidden group flex flex-col">
-                  <div className="aspect-video bg-black relative overflow-hidden">
-                    {post.featured_image ? (
-                      <img src={pb.files.getURL(post, post.featured_image)} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-muted-foreground font-bold tracking-widest uppercase">STRONGBUILD</div>
-                    )}
-                    {post.category && (
-                      <span className="absolute top-4 left-4 bg-accent text-white text-xs font-bold px-2 py-1 tracking-wider uppercase">
-                        {post.category}
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">{post.title}</h3>
-                    <p className="text-muted-foreground text-sm line-clamp-3 mb-4 flex-1">{post.excerpt || post.content.substring(0,100)}...</p>
-                    <div className="text-xs text-primary font-medium tracking-wider uppercase mt-auto">
-                      {new Date(post.publish_date || post.created).toLocaleDateString()} • {post.reading_time || 5} Min Read
+              {posts.map(post => {
+                const fallbackMatch = FALLBACK_BLOG_POSTS.find(f => f.slug === post.slug);
+                const imageSrc = post.featured_image
+                  ? pb.files.getURL(post, post.featured_image)
+                  : (post.cover_image || fallbackMatch?.cover_image || "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200&auto=format&fit=crop");
+
+                return (
+                  <Link key={post.id || post.slug} to={`/blog/${post.slug}`} className="luxury-card rounded-lg overflow-hidden group flex flex-col hover:border-accent/40 transition-all">
+                    <div className="aspect-video bg-black relative overflow-hidden">
+                      <img src={imageSrc} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      {post.category && (
+                        <span className="absolute top-4 left-4 bg-accent text-white text-xs font-bold px-2.5 py-1 tracking-wider uppercase rounded shadow">
+                          {post.category}
+                        </span>
+                      )}
                     </div>
-                  </div>
-                </Link>
-              ))}
+                    <div className="p-6 flex-1 flex flex-col">
+                      <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-accent transition-colors">{post.title}</h3>
+                      <p className="text-muted-foreground text-sm line-clamp-3 mb-4 flex-1">{post.excerpt || post.content?.substring(0,100)}...</p>
+                      <div className="text-xs text-primary font-medium tracking-wider uppercase mt-auto">
+                        {new Date(post.publish_date || post.created).toLocaleDateString()} • {post.reading_time || 5} Min Read
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-24 text-muted-foreground">

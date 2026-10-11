@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowLeft, ArrowRight, Loader2 } from 'lucide-react';
 import pb from '@/lib/pocketbaseClient.js';
 import { LoadingSpinner } from '@/components/SharedComponents.jsx';
+import { FALLBACK_BLOG_POSTS } from '@/data/blogFallback.js';
 
 const BlogPostDetailPage = () => {
   const { slug } = useParams();
@@ -26,10 +27,23 @@ const BlogPostDetailPage = () => {
           $autoCancel: false,
         });
       })
-      .then((res) => setRelated(res.items || []))
+      .then((res) => {
+        const items = res.items || [];
+        if (items.length > 0) {
+          setRelated(items);
+        } else {
+          setRelated(FALLBACK_BLOG_POSTS.filter(p => p.slug !== slug));
+        }
+      })
       .catch((err) => {
-        if (err?.status === 404) setNotFound(true);
-        else console.error(err);
+        // Fallback to static articles if PocketBase fails or returns 404
+        const localMatch = FALLBACK_BLOG_POSTS.find(p => p.slug === slug);
+        if (localMatch) {
+          setPost(localMatch);
+          setRelated(FALLBACK_BLOG_POSTS.filter(p => p.slug !== slug));
+        } else {
+          setNotFound(true);
+        }
       })
       .finally(() => setLoading(false));
   }, [slug]);
@@ -45,6 +59,11 @@ const BlogPostDetailPage = () => {
       </div>
     );
   }
+
+  const fallbackMatch = FALLBACK_BLOG_POSTS.find(f => f.slug === post.slug);
+  const coverImg = post.featured_image
+    ? pb.files.getURL(post, post.featured_image)
+    : (post.cover_image || fallbackMatch?.cover_image);
 
   const paragraphs = (post.content || '').split('\n').filter(Boolean);
 
@@ -72,10 +91,10 @@ const BlogPostDetailPage = () => {
       </section>
 
       {/* Featured image */}
-      {post.featured_image ? (
+      {coverImg ? (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-12 relative z-10">
-          <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/10">
-            <img src={pb.files.getURL(post, post.featured_image)} alt={post.title} className="w-full h-full object-cover" />
+          <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <img src={coverImg} alt={post.title} className="w-full h-full object-cover" />
           </div>
         </div>
       ) : null}
@@ -106,21 +125,24 @@ const BlogPostDetailPage = () => {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-black uppercase text-white tracking-tight mb-8">Keep reading</h2>
             <div className="grid md:grid-cols-3 gap-6">
-              {related.map((r) => (
-                <Link key={r.id} to={`/blog/${r.slug}`} className="luxury-card rounded-xl overflow-hidden group flex flex-col">
-                  <div className="aspect-video bg-black relative overflow-hidden">
-                    {r.featured_image ? (
-                      <img src={pb.files.getURL(r, r.featured_image)} alt={r.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-muted-foreground font-bold tracking-widest uppercase text-xs">STRONGBUILD</div>
-                    )}
-                  </div>
-                  <div className="p-5">
-                    {r.category && <span className="text-xs text-brand-blue font-bold uppercase tracking-wider">{r.category}</span>}
-                    <h3 className="font-bold text-white mt-2 line-clamp-2">{r.title}</h3>
-                  </div>
-                </Link>
-              ))}
+              {related.map((r) => {
+                const rFallback = FALLBACK_BLOG_POSTS.find(f => f.slug === r.slug);
+                const rImg = r.featured_image
+                  ? pb.files.getURL(r, r.featured_image)
+                  : (r.cover_image || rFallback?.cover_image || "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200&auto=format&fit=crop");
+
+                return (
+                  <Link key={r.id || r.slug} to={`/blog/${r.slug}`} className="luxury-card rounded-xl overflow-hidden group flex flex-col hover:border-accent/40 transition-all">
+                    <div className="aspect-video bg-black relative overflow-hidden">
+                      <img src={rImg} alt={r.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div className="p-5 flex-1 flex flex-col">
+                      {r.category && <span className="text-xs text-brand-blue font-bold uppercase tracking-wider">{r.category}</span>}
+                      <h3 className="font-bold text-white mt-2 line-clamp-2 group-hover:text-accent transition-colors">{r.title}</h3>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
