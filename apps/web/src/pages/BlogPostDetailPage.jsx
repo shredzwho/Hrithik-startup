@@ -77,10 +77,12 @@ const BlogPostDetailPage = () => {
       {/* Hero */}
       <section className="relative pt-32 pb-16 border-b border-white/10 bg-[#070707]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-brand-blue text-sm font-bold uppercase tracking-wider mb-6 hover:text-white transition-colors">
-            <ArrowLeft className="h-4 w-4" /> All Articles
-          </Link>
-          {post.category && <span className="section-eyebrow">{post.category}</span>}
+          <div className="mb-6">
+            <Link to="/blog" className="inline-flex items-center gap-2 text-brand-blue text-sm font-bold uppercase tracking-wider hover:text-white transition-colors">
+              <ArrowLeft className="h-4 w-4" /> All Articles
+            </Link>
+          </div>
+          {post.category && <span className="section-eyebrow block mb-3">{post.category}</span>}
           <h1 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2 mb-6 heading-balance">{post.title}</h1>
           <div className="flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
             {post.author && <span className="font-bold text-white/80">{post.author}</span>}
