@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Outfit", system-ui, sans-serif;
+  overflow-x: hidden;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  line-height: 1.625;
+  letter-spacing: 0.01em;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  :root, .dark {
+    /* Dark Luxury System */
+    --background: 0 0% 0%; /* Pure Black */
+    --foreground: 0 0% 100%; /* Pure White */
+    
+    --card: 0 0% 4%; /* Dark Charcoal */
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 100%;
+    
+    --primary: 0 100% 50%; /* Red Accent */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 0 0% 75%; /* Silver */
+    --secondary-foreground: 0 0% 0%;
+    
+    --muted: 0 0% 10%; /* Charcoal */
+    --muted-foreground: 0 0% 65%;
+    
+    --accent: 0 100% 50%; /* Red for CTAs */
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 10%;
+    --ring: 0 100% 50%;
+    
+    --radius: 0.75rem;
+
+    /* Brand blue accent */
+    --brand-blue: 214 92% 52%;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .text-brand-blue { color: hsl(var(--brand-blue)); }
+  .bg-brand-blue { background-color: hsl(var(--brand-blue)); }
+  .border-brand-blue { border-color: hsl(var(--brand-blue)); }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: hsl(var(--brand-blue));
+    font-weight: 700;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+
+  .heading-balance {
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+  
+  .glass-header {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .luxury-card {
+    background: linear-gradient(145deg, hsl(var(--card)), hsl(0 0% 2%));
+    border: 1px solid hsl(var(--border));
+    transition: all 0.3s ease;
+  }
+
+  .luxury-card:hover {
+    border-color: rgba(255, 0, 0, 0.3);
+    box-shadow: 0 10px 40px -10px rgba(255, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Form Input Contrast overrides */
+  input, textarea, select {
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--muted));
+    transition: all 0.2s ease;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.2);
+    outline: none;
+  }
+
+  .premium-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .premium-table th, .premium-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  
+  .premium-table th {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+    color: hsl(var(--secondary));
+  }
+
+  .premium-table tr:last-child td {
+    border-bottom: none;
+  }
+}
