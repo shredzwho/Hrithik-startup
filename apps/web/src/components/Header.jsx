@@ -38,19 +38,19 @@ const Header = ({ setIsCartOpen }) => {
   return (
     <>
       <header className={`fixed top-0 w-full z-40 transition-all duration-300 ${scrolled ? 'glass-header shadow-2xl' : 'bg-transparent'}`}>
-        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ${scrolled ? 'py-3' : 'py-4'}`}>
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ${scrolled ? 'py-2.5 sm:py-3' : 'py-3 sm:py-4'}`}>
           <div className="flex items-center justify-between">
             
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group z-50">
+            <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group z-50">
               <motion.img
                 src="https://horizons-cdn.hostinger.com/909a38b5-4cd3-4dfc-8d2d-40035029ddbf/64d2f3751498e17703be6c6d3a5616d6.png"
                 alt="StrongBuild logo"
-                className="h-[40px] md:h-[50px] w-auto drop-shadow-md"
+                className="h-[36px] sm:h-[44px] md:h-[50px] w-auto drop-shadow-md"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               />
-              <span className="text-xl md:text-2xl font-black tracking-tight text-white hidden sm:block">
+              <span className="text-base sm:text-xl md:text-2xl font-black tracking-tight text-white block">
                 STRONGBUILD
               </span>
             </Link>
@@ -73,7 +73,7 @@ const Header = ({ setIsCartOpen }) => {
             </nav>
             
             {/* Actions */}
-            <div className="flex items-center gap-3 md:gap-5 z-50">
+            <div className="flex items-center gap-2 sm:gap-4 md:gap-5 z-50">
               {isAuthenticated ? (
                 <div className="hidden md:flex items-center gap-4">
                   <Link to="/account" className="text-sm font-semibold text-primary hover:text-white transition-colors">Account</Link>
@@ -83,19 +83,21 @@ const Header = ({ setIsCartOpen }) => {
                 <Link to="/login" className="hidden md:block text-sm font-semibold text-primary hover:text-white transition-colors">Login</Link>
               )}
 
-              <Button variant="ghost" size="icon" className="text-primary hover:text-white hover:bg-white/5 rounded-full">
-                <Search className="h-5 w-5" />
-              </Button>
+              <Link to="/shop">
+                <Button variant="ghost" size="icon" className="text-primary hover:text-white hover:bg-white/5 rounded-full h-9 w-9 sm:h-10 sm:w-10">
+                  <Search className="h-4 w-4 sm:h-5 sm:w-5" />
+                </Button>
+              </Link>
 
               <Button
                 onClick={() => setIsCartOpen(true)}
                 variant="ghost"
                 size="icon"
-                className="relative text-primary hover:text-white hover:bg-white/5 rounded-full"
+                className="relative text-primary hover:text-white hover:bg-white/5 rounded-full h-9 w-9 sm:h-10 sm:w-10"
               >
-                <ShoppingCart className="h-5 w-5" />
+                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
                 {cartItemCount > 0 && (
-                  <span className="absolute 0 top-0 right-0 bg-accent text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center shadow-sm translate-x-1 -translate-y-1">
+                  <span className="absolute 0 top-0 right-0 bg-accent text-white text-[10px] font-bold rounded-full h-4 min-w-[16px] px-1 flex items-center justify-center shadow-sm translate-x-1 -translate-y-1">
                     {cartItemCount}
                   </span>
                 )}
@@ -105,9 +107,9 @@ const Header = ({ setIsCartOpen }) => {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 variant="ghost"
                 size="icon"
-                className="lg:hidden text-primary hover:text-white hover:bg-white/5 rounded-full"
+                className="lg:hidden text-primary hover:text-white hover:bg-white/5 rounded-full h-9 w-9 sm:h-10 sm:w-10"
               >
-                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </div>
           </div>
@@ -123,46 +125,91 @@ const Header = ({ setIsCartOpen }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="lg:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl border-b border-white/10 shadow-2xl"
+              className="lg:hidden absolute top-full left-0 w-full max-h-[80vh] overflow-y-auto bg-black/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl"
             >
-              <nav className="flex flex-col p-6 space-y-4">
-                {navLinks.map((link) => (
+              <div className="p-5 space-y-6">
+                {/* Popular Categories Shortcut */}
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-accent mb-3">Popular Gear</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { name: 'Lever Belts', path: '/shop' },
+                      { name: 'Wrist Wraps', path: '/shop' },
+                      { name: 'Liquid Chalk', path: '/shop' },
+                      { name: 'Bundles & Kits', path: '/shop' },
+                    ].map((cat, i) => (
+                      <Link
+                        key={i}
+                        to={cat.path}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg p-2.5 text-xs font-bold text-white uppercase tracking-wider flex items-center justify-between"
+                      >
+                        <span>{cat.name}</span>
+                        <span className="text-accent text-[10px]">→</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Primary Nav Links */}
+                <nav className="flex flex-col space-y-3 pt-2 border-t border-white/10">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`text-base font-bold tracking-wider uppercase transition-colors duration-200 py-1 ${
+                        isActive(link.path) ? 'text-accent' : 'text-white hover:text-accent'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </nav>
+
+                {/* Quick Utilities */}
+                <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
                   <Link
-                    key={link.path}
-                    to={link.path}
+                    to="/track-order"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`text-lg font-bold tracking-widest uppercase transition-colors duration-200 ${
-                      isActive(link.path) ? 'text-accent' : 'text-white hover:text-accent'
-                    }`}
+                    className="text-xs font-semibold text-white/70 hover:text-white uppercase tracking-wider"
                   >
-                    {link.label}
+                    📦 Track Your Order
                   </Link>
-                ))}
-                <div className="pt-6 mt-2 border-t border-white/10 flex flex-col gap-4">
+                  <a
+                    href="https://wa.me/918317339439"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-semibold text-[#25D366] flex items-center gap-1.5 uppercase tracking-wider"
+                  >
+                    💬 WhatsApp Support (+91 83173 39439)
+                  </a>
                   {isAuthenticated ? (
-                    <>
-                      <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-white">My Account</Link>
-                      <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="text-lg font-bold text-muted-foreground text-left">Logout</button>
-                    </>
+                    <div className="pt-2 flex items-center justify-between">
+                      <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-white">My Account</Link>
+                      <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="text-xs font-bold text-muted-foreground hover:text-white">Logout</button>
+                    </div>
                   ) : (
-                    <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-white">Login / Register</Link>
+                    <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-white pt-1">
+                      Login / Create Account →
+                    </Link>
                   )}
                 </div>
-              </nav>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </header>
 
-      {/* Floating WhatsApp Button */}
+      {/* Floating WhatsApp Button - Offset for mobile bottom nav */}
       <a 
         href="https://wa.me/918317339439" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 h-14 w-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-40"
+        className="fixed bottom-20 lg:bottom-6 right-4 sm:right-6 h-12 w-12 sm:h-14 sm:w-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform z-40"
         aria-label="Chat on WhatsApp"
       >
-        <MessageCircle className="h-7 w-7" />
+        <MessageCircle className="h-6 w-6 sm:h-7 sm:w-7" />
       </a>
     </>
   );

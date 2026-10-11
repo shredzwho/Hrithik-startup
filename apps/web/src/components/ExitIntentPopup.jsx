@@ -28,22 +28,25 @@ const ExitIntentPopup = () => {
       setOpen(true);
     };
 
+    const pageMountTime = Date.now();
+
     // Desktop: exit intent when cursor leaves through the top of the viewport
     const handleMouseOut = (e) => {
       if (e.relatedTarget === null && e.clientY <= 0) trigger();
     };
 
-    // Mobile: trigger after user scrolls back up past 40% of the page
+    // Mobile: trigger only after user has browsed for at least 25s and then scrolls back up
     let mobileTriggered = false;
     const handleScroll = () => {
       if (mobileTriggered) return;
+      if (Date.now() - pageMountTime < 25000) return; // Must have browsed at least 25 seconds
+      
       const scrolled = window.scrollY;
       const max = document.body.scrollHeight - window.innerHeight;
       const pct = max > 0 ? scrolled / max : 0;
       if (pct > 0.4 && pct < 0.7) {
         mobileTriggered = true;
-        // small delay so it doesn't feel jumpy
-        setTimeout(trigger, 600);
+        setTimeout(trigger, 800);
       }
     };
 

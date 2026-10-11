@@ -12,6 +12,7 @@ import Footer from '@/components/Footer.jsx';
 import ShoppingCart from '@/components/ShoppingCart.jsx';
 import ExitIntentPopup from '@/components/ExitIntentPopup.jsx';
 import AdminLayout from '@/components/AdminLayout.jsx';
+import MobileBottomNav from '@/components/MobileBottomNav.jsx';
 
 import HomePage from '@/pages/HomePage.jsx';
 import ShopPage from '@/pages/ShopPage.jsx';
@@ -57,7 +58,7 @@ function App() {
               <Route path="/*" element={
                 <div className="flex flex-col min-h-screen bg-background text-foreground">
                   <Header setIsCartOpen={setIsCartOpen} />
-                  <main className="flex-grow">
+                  <main className="flex-grow pb-16 lg:pb-0">
                     <Routes>
                       <Route path="/" element={<HomePage />} />
                       <Route path="/shop" element={<ShopPage />} />
@@ -96,6 +97,7 @@ function App() {
                     </Routes>
                   </main>
                   <Footer />
+                  <MobileBottomNav setIsCartOpen={setIsCartOpen} />
                   <ShoppingCart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
                   <ExitIntentPopup />
                 </div>

@@ -73,6 +73,13 @@ export const CartProvider = ({ children }) => {
     }, 0), cartItems[0]?.variant?.currency_info);
   }, [cartItems]);
 
+  const getCartTotalInCents = useCallback(() => {
+    return cartItems.reduce((total, item) => {
+      const price = item.variant.sale_price_in_cents ?? item.variant.price_in_cents ?? 0;
+      return total + price * item.quantity;
+    }, 0);
+  }, [cartItems]);
+
   const value = useMemo(() => ({
     cartItems,
     addToCart,
@@ -80,7 +87,8 @@ export const CartProvider = ({ children }) => {
     updateQuantity,
     clearCart,
     getCartTotal,
-  }), [cartItems, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal]);
+    getCartTotalInCents,
+  }), [cartItems, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal, getCartTotalInCents]);
 
   return (
     <CartContext.Provider value={value}>

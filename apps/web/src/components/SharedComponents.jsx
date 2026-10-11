@@ -67,17 +67,17 @@ export const WishlistButton = ({ product }) => {
     <button 
       onClick={handleWishlist}
       disabled={isAdding}
-      className="absolute top-4 right-4 h-10 w-10 bg-black/50 backdrop-blur rounded-full flex items-center justify-center hover:bg-accent hover:text-white transition-colors border border-white/10 z-10"
+      className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 h-8 w-8 sm:h-10 sm:w-10 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-accent hover:text-white transition-colors border border-white/10 z-10 active:scale-90"
       aria-label="Add to wishlist"
     >
-      <Heart className={`h-5 w-5 ${isAdding ? 'animate-pulse' : ''}`} />
+      <Heart className={`h-4 w-4 sm:h-5 sm:w-5 ${isAdding ? 'animate-pulse' : ''}`} />
     </button>
   );
 };
 
 export const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
-  const defaultVariant = product.variants[0];
+  const defaultVariant = product.variants?.[0];
   const isLowStock = defaultVariant?.inventory_quantity > 0 && defaultVariant?.inventory_quantity <= 5;
   const isOutOfStock = defaultVariant?.inventory_quantity === 0;
 
@@ -91,40 +91,43 @@ export const ProductCard = ({ product }) => {
 
   return (
     <Link to={`/product/${product.id}`} className="block group">
-      <div className="luxury-card rounded-lg overflow-hidden h-full flex flex-col relative">
+      <div className="luxury-card rounded-xl overflow-hidden h-full flex flex-col relative border border-white/5 hover:border-white/20 transition-all duration-300">
         <WishlistButton product={product} />
         
         <div className="aspect-[4/5] bg-secondary relative overflow-hidden">
           <img 
             src={product.image || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWExYTFhIi8+PC9zdmc+'} 
             alt={`${product.title} — powerlifting gear by STRONGBUILD`}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85 group-hover:opacity-100"
+            loading="lazy"
           />
           {product.ribbon_text && (
-            <span className="absolute top-4 left-4 bg-accent text-white text-xs font-bold px-2 py-1 tracking-wider uppercase">
+            <span className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 bg-accent text-white text-[10px] sm:text-xs font-black px-2 py-0.5 sm:py-1 rounded tracking-wider uppercase shadow-md">
               {product.ribbon_text}
             </span>
           )}
           {isLowStock && (
-            <span className="absolute bottom-4 left-4 bg-orange-600 text-white text-xs font-bold px-2 py-1 tracking-wider uppercase">
+            <span className="absolute bottom-2.5 left-2.5 sm:bottom-4 sm:left-4 bg-orange-600 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded tracking-wider uppercase">
               Only {defaultVariant.inventory_quantity} Left
             </span>
           )}
         </div>
         
-        <div className="p-5 flex flex-col flex-grow">
-          <h3 className="font-semibold text-lg mb-1 truncate">{product.title}</h3>
-          <p className="text-sm text-muted-foreground mb-4 line-clamp-1">{product.subtitle}</p>
+        <div className="p-3 sm:p-4 md:p-5 flex flex-col flex-grow">
+          <h3 className="font-bold text-xs sm:text-sm md:text-base text-white mb-1 line-clamp-1 group-hover:text-accent transition-colors">
+            {product.title}
+          </h3>
+          <p className="text-[11px] sm:text-xs text-muted-foreground mb-3 line-clamp-1">{product.subtitle}</p>
           
           <div className="mt-auto flex items-center justify-between">
-            <div className="font-bold text-lg">
+            <div className="font-black text-xs sm:text-base md:text-lg">
               {defaultVariant?.sale_price_formatted ? (
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                  <span className="text-accent whitespace-nowrap">{defaultVariant.sale_price_formatted}</span>
-                  <span className="text-sm text-muted-foreground line-through whitespace-nowrap">{defaultVariant.price_formatted}</span>
+                <div className="flex flex-wrap items-baseline gap-x-1.5 sm:gap-x-2">
+                  <span className="text-accent">{defaultVariant.sale_price_formatted}</span>
+                  <span className="text-[11px] sm:text-xs text-muted-foreground line-through">{defaultVariant.price_formatted}</span>
                 </div>
               ) : (
-                <span>{defaultVariant?.price_formatted || 'TBD'}</span>
+                <span className="text-white">{defaultVariant?.price_formatted || 'TBD'}</span>
               )}
             </div>
           </div>
@@ -132,7 +135,11 @@ export const ProductCard = ({ product }) => {
           <Button 
             onClick={handleQuickAdd}
             disabled={isOutOfStock}
-            className={`w-full mt-4 font-bold tracking-wider uppercase rounded-sm ${isOutOfStock ? 'bg-secondary text-muted-foreground' : 'bg-white text-black hover:bg-accent hover:text-white'}`}
+            className={`w-full mt-3 h-8 sm:h-10 text-[11px] sm:text-xs md:text-sm font-bold tracking-wider uppercase rounded-lg active:scale-95 transition-all ${
+              isOutOfStock 
+                ? 'bg-secondary text-muted-foreground' 
+                : 'bg-white text-black hover:bg-accent hover:text-white shadow-sm'
+            }`}
           >
             {isOutOfStock ? 'Out of Stock' : 'Quick Add'}
           </Button>

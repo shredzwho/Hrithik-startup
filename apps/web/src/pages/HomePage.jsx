@@ -158,42 +158,78 @@ const HomePage = () => {
               Launch Offer — 10% off your first order
             </span>
             <span className="section-eyebrow">Strength · Pride · Honour</span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white heading-balance mb-5 mt-3">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-white heading-balance mb-3 sm:mb-5 mt-2 sm:mt-3">
               Built for Max<br className="hidden sm:block" /> Squats &amp; Deadlifts
             </h1>
-            <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto mb-3">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-400 to-red-500 font-bold uppercase tracking-widest text-sm md:text-base">India&apos;s Premium Powerlifting Gear</span>
+            <p className="text-sm md:text-lg text-white/80 max-w-2xl mx-auto mb-2 sm:mb-3">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-400 to-red-500 font-black uppercase tracking-widest text-xs sm:text-sm md:text-base">India&apos;s Premium Powerlifting Gear</span>
             </p>
-            <p className="text-sm md:text-base text-white/60 max-w-xl mx-auto mb-10">
+            <p className="text-xs sm:text-sm md:text-base text-white/60 max-w-xl mx-auto mb-6 sm:mb-10">
               Competition-ready 13mm lever belts, wrist wraps, figure-8 straps and chalk — engineered for lifters who train to break records, not to look the part.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Link to="/shop">
-                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-12 w-full sm:w-auto bg-accent hover:bg-accent/90 text-white font-bold tracking-widest uppercase px-10 py-6 rounded-xl text-base active:scale-[0.98] transition-transform">
-                  <ArrowRight className="h-5 w-5" /> Shop Now
+                <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-11 sm:h-12 w-full sm:w-auto bg-accent hover:bg-accent/90 text-white font-bold tracking-widest uppercase px-8 sm:px-10 py-5 sm:py-6 rounded-xl text-sm sm:text-base active:scale-[0.98] transition-transform">
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" /> Shop Now
                 </button>
               </Link>
               <a href="#bundles" className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full sm:w-auto glass-panel border-white/20 text-white hover:bg-white hover:text-black font-bold tracking-widest uppercase px-10 py-6 rounded-xl text-base transition-colors">
+                <Button variant="outline" className="w-full sm:w-auto glass-panel border-white/20 text-white hover:bg-white hover:text-black font-bold tracking-widest uppercase px-8 sm:px-10 py-5 sm:py-6 rounded-xl text-sm sm:text-base transition-colors h-11 sm:h-12">
                   View Bundles
                 </Button>
               </a>
             </div>
-            <p className="text-xs text-white/50 mt-6 uppercase tracking-wider">Free shipping over ₹1,499 · 30-day returns · 2-year warranty</p>
+            <p className="text-[11px] sm:text-xs text-white/50 mt-4 sm:mt-6 uppercase tracking-wider">Free shipping over ₹1,499 · 30-day returns · 2-year warranty</p>
           </motion.div>
         </div>
       </section>
 
-      {/* Trust badges */}
+      {/* Trust badges - Optimized mobile density */}
       <section className="border-y border-white/10 bg-[#050505]">
         <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-white/10">
-          {BADGES.map(b => <div key={b.title} className="flex items-center gap-4 px-6 py-8">
-              <b.icon className="h-7 w-7 text-brand-blue shrink-0" strokeWidth={1.6} />
-              <div>
-                <p className="font-bold uppercase text-sm tracking-wider text-white">{b.title}</p>
-                <p className="text-xs text-muted-foreground">{b.desc}</p>
+          {BADGES.map(b => (
+            <div key={b.title} className="flex items-center gap-3 sm:gap-4 px-3.5 sm:px-6 py-4 sm:py-8">
+              <b.icon className="h-5 w-5 sm:h-7 sm:w-7 text-brand-blue shrink-0" strokeWidth={1.6} />
+              <div className="min-w-0">
+                <p className="font-bold uppercase text-xs sm:text-sm tracking-wider text-white truncate">{b.title}</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground truncate">{b.desc}</p>
               </div>
-            </div>)}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Visual Shop By Category Rail (Thumb-friendly mobile carousel) */}
+      <section className="py-10 sm:py-16 bg-[#030303] border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-end mb-6">
+            <div>
+              <span className="section-eyebrow">Explore Collections</span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase text-white tracking-tight mt-1">Shop by Category</h2>
+            </div>
+            <Link to="/shop" className="text-xs sm:text-sm font-bold text-accent uppercase tracking-wider hover:underline flex items-center gap-1">
+              View All →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2.5 sm:gap-4">
+            {CATEGORIES.slice(0, 6).map((c, i) => (
+              <Link key={i} to="/shop" className="group flex flex-col items-center text-center">
+                <div className="aspect-square w-full rounded-xl overflow-hidden border border-white/10 group-hover:border-accent bg-secondary/40 relative shadow-sm transition-all duration-300">
+                  <img
+                    src={c.img}
+                    alt={c.name}
+                    className="w-full h-full object-cover group-hover:scale-110 opacity-80 group-hover:opacity-100 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  <span className="absolute bottom-2 inset-x-1 text-[11px] sm:text-xs font-black uppercase tracking-wider text-white line-clamp-1 drop-shadow-md">
+                    {c.name}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

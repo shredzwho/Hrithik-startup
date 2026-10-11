@@ -16,6 +16,7 @@ import pb from '@/lib/pocketbaseClient.js';
 const ProductDetailPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [activeImage, setActiveImage] = useState(null);
   const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -32,6 +33,7 @@ const ProductDetailPage = () => {
     getProduct(id)
       .then((res) => {
         setProduct(res);
+        setActiveImage(null);
         trackRecentlyViewed(res);
         // Initialise option selections with the first value of each option
         const init = {};
@@ -66,6 +68,7 @@ const ProductDetailPage = () => {
   if (loading) return <LoadingSpinner />;
   if (!product) return <div className="text-center py-32 text-white">Product not found</div>;
 
+  const currentDisplayImage = activeImage || selectedVariant?.image_url || product.image;
   const isOutOfStock = selectedVariant?.manage_inventory && selectedVariant?.inventory_quantity === 0;
   const isLowStock = selectedVariant?.manage_inventory && selectedVariant?.inventory_quantity > 0 && selectedVariant?.inventory_quantity <= 5;
 
@@ -125,20 +128,36 @@ const ProductDetailPage = () => {
         <meta name="keywords" content={`powerlifting lever belt, adjustable lever belt for squats, ${product.title}, powerlifting gear India, STRONGBUILD`} />
       </Helmet>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 pt-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24 sm:pt-32 pb-24 md:pb-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16 md:mb-24">
 
           {/* Images */}
-          <div className="space-y-4">
-            <div className="aspect-square bg-secondary rounded-lg overflow-hidden border border-border">
-              <img src={selectedVariant?.image_url || product.image} alt={product.title} className="w-full h-full object-cover" />
+          <div className="space-y-3 sm:space-y-4">
+            <div className="aspect-square bg-secondary rounded-xl overflow-hidden border border-border/80 relative shadow-lg">
+              <img src={currentDisplayImage} alt={product.title} className="w-full h-full object-cover transition-all duration-300" />
             </div>
             {product.images?.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
-                {product.images.slice(0, 4).map((img, i) => (
-                  <div key={i} className="aspect-square bg-secondary rounded-sm overflow-hidden border border-border cursor-pointer hover:border-accent">
+              <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-1 no-scrollbar">
+                <button
+                  type="button"
+                  onClick={() => setActiveImage(product.image)}
+                  className={`aspect-square w-16 sm:w-20 rounded-lg overflow-hidden border-2 shrink-0 transition-all ${
+                    currentDisplayImage === product.image ? 'border-accent shadow-md scale-95' : 'border-border/60 hover:border-white/40'
+                  }`}
+                >
+                  <img src={product.image} alt={`${product.title} main view`} className="w-full h-full object-cover" />
+                </button>
+                {product.images.map((img, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActiveImage(img.url)}
+                    className={`aspect-square w-16 sm:w-20 rounded-lg overflow-hidden border-2 shrink-0 transition-all ${
+                      currentDisplayImage === img.url ? 'border-accent shadow-md scale-95' : 'border-border/60 hover:border-white/40'
+                    }`}
+                  >
                     <img src={img.url} alt={`${product.title} — view ${i + 1}`} className="w-full h-full object-cover" />
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -167,13 +186,17 @@ const ProductDetailPage = () => {
                 {product.options.map((opt) => (
                   <div key={opt.id}>
                     <label className="block text-sm font-bold uppercase tracking-wider text-white mb-2">{opt.title}</label>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 sm:gap-2.5">
                       {opt.values.map((v) => (
                         <button
                           key={v.id}
                           type="button"
                           onClick={() => setSelectedOptions((prev) => ({ ...prev, [opt.id]: v.value }))}
-                          className={`px-4 py-2 rounded-sm border text-sm font-bold uppercase tracking-wider transition-colors ${selectedOptions[opt.id] === v.value ? 'bg-accent border-accent text-white' : 'bg-secondary border-border text-muted-foreground hover:text-white hover:border-white/40'}`}
+                          className={`min-h-[42px] min-w-[46px] px-3.5 sm:px-4 py-2 rounded-lg border text-xs sm:text-sm font-bold uppercase tracking-wider transition-all active:scale-95 ${
+                            selectedOptions[opt.id] === v.value
+                              ? 'bg-accent border-accent text-white shadow-md shadow-accent/20'
+                              : 'bg-secondary/70 border-border text-muted-foreground hover:text-white hover:border-white/40'
+                          }`}
                         >
                           {v.value}
                         </button>
@@ -323,14 +346,22 @@ const ProductDetailPage = () => {
         <RecentlyViewed excludeId={product.id} />
       </div>
 
-      {/* Sticky mobile CTA */}
-      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 glass-panel border-t border-white/10 p-3 flex items-center gap-3">
-        <div className="flex-1 min-w-0">
-          <p className="text-xs text-muted-foreground truncate">{product.title}</p>
-          <p className="font-bold text-white">{selectedVariant?.sale_price_formatted || selectedVariant?.price_formatted}</p>
+      {/* Sticky mobile CTA anchored above MobileBottomNav */}
+      <div className="lg:hidden fixed bottom-14 inset-x-0 z-30 bg-black/95 backdrop-blur-2xl border-t border-white/10 px-3 py-2.5 shadow-2xl flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <img src={currentDisplayImage} alt={product.title} className="w-10 h-10 rounded-lg object-cover border border-white/10 shrink-0" />
+          <div className="min-w-0">
+            <p className="text-[11px] text-muted-foreground truncate max-w-[130px] sm:max-w-[180px]">{product.title}</p>
+            <p className="font-black text-sm text-accent">{selectedVariant?.sale_price_formatted || selectedVariant?.price_formatted}</p>
+          </div>
         </div>
-        <Button onClick={handleAddToCart} disabled={isOutOfStock} className="bg-white text-black font-bold uppercase tracking-wider rounded-xl px-4">Add</Button>
-        <Button onClick={handleAddToCart} disabled={isOutOfStock} className="bg-accent hover:bg-accent/90 text-white font-bold uppercase tracking-wider rounded-xl px-4">Buy Now</Button>
+        <Button
+          onClick={handleAddToCart}
+          disabled={isOutOfStock}
+          className="flex-1 max-w-[180px] h-10 bg-accent hover:bg-accent/90 text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow-lg shadow-accent/20 active:scale-95 transition-all"
+        >
+          {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
+        </Button>
       </div>
     </>
   );
