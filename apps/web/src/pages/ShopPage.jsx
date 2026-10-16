@@ -69,11 +69,17 @@ const ShopPage = () => {
         <meta name="description" content="Browse STRONGBUILD lever belts, wrist wraps, figure-8 straps, chalk, singlets and bundles. Filter by category, price and popularity." />
       </Helmet>
 
-      <div className="pt-24 sm:pt-32 pb-6 sm:pb-12 border-b border-white/10 bg-[#070707]">
+      <div className="pt-28 sm:pt-36 pb-8 sm:pb-14 border-b border-white/10 bg-gradient-to-b from-[#0e0e0e] to-[#050505]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="section-eyebrow">The arsenal</span>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-white uppercase tracking-tight mt-1 heading-balance">Shop all gear</h1>
-          <p className="text-xs sm:text-sm md:text-base text-muted-foreground mt-2 max-w-xl">Every piece built to competition spec and tested by athletes on the platform.</p>
+          <span className="font-steelfish text-base sm:text-lg uppercase tracking-widest text-brand-blue font-bold">
+            The Official Arsenal
+          </span>
+          <h1 className="font-steelfish text-5xl sm:text-6xl md:text-7xl font-bold text-white uppercase tracking-tight mt-1 heading-balance">
+            SHOP ALL COMPETITION GEAR
+          </h1>
+          <p className="text-xs sm:text-sm md:text-base text-white/60 mt-2 max-w-xl font-sans">
+            Every piece is built to IPF dimensional specifications, load-tested on heavy singles, and backed by our 2-year warranty.
+          </p>
         </div>
       </div>
 
@@ -84,9 +90,9 @@ const ShopPage = () => {
           <button
             type="button"
             onClick={() => setCategory('all')}
-            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shrink-0 ${
+            className={`whitespace-nowrap px-5 py-2.5 rounded-full font-steelfish text-lg tracking-wider uppercase transition-all shrink-0 ${
               category === 'all'
-                ? 'bg-accent text-white shadow-lg shadow-accent/20 border border-accent'
+                ? 'bg-accent text-white shadow-lg shadow-accent/25 border border-accent font-bold'
                 : 'bg-white/5 hover:bg-white/10 text-white/70 hover:text-white border border-white/10'
             }`}
           >
@@ -97,9 +103,9 @@ const ShopPage = () => {
               key={cat.id}
               type="button"
               onClick={() => setCategory(cat.id)}
-              className={`whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shrink-0 ${
+              className={`whitespace-nowrap px-5 py-2.5 rounded-full font-steelfish text-lg tracking-wider uppercase transition-all shrink-0 ${
                 category === cat.id
-                  ? 'bg-accent text-white shadow-lg shadow-accent/20 border border-accent'
+                  ? 'bg-accent text-white shadow-lg shadow-accent/25 border border-accent font-bold'
                   : 'bg-white/5 hover:bg-white/10 text-white/70 hover:text-white border border-white/10'
               }`}
             >

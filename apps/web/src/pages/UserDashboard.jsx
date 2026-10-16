@@ -110,10 +110,11 @@ const UserDashboard = () => {
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 
-      <div className="bg-[#0a0a0a] py-12 pt-32 border-b border-white/10">
+      <div className="bg-gradient-to-b from-[#0f0f0f] to-[#050505] py-12 pt-36 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-2">My Account</h1>
-          <p className="text-white/70">Welcome back, {currentUser?.name || currentUser?.email}</p>
+          <span className="font-steelfish text-base uppercase tracking-widest text-brand-blue font-bold block mb-1">Athlete Portal</span>
+          <h1 className="font-steelfish text-4xl sm:text-5xl font-bold text-white uppercase tracking-wider mb-1">MY ACCOUNT &amp; ORDERS</h1>
+          <p className="text-white/60 text-xs sm:text-sm font-sans">Welcome back, {currentUser?.name || currentUser?.email}</p>
         </div>
       </div>
 
@@ -125,23 +126,23 @@ const UserDashboard = () => {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`flex items-center gap-3 text-left px-4 py-3 rounded-sm font-bold uppercase tracking-wider text-sm transition-colors ${activeTab === tab.key ? 'bg-accent text-white' : 'bg-transparent text-muted-foreground hover:bg-secondary hover:text-white'}`}
+              className={`flex items-center gap-3 text-left px-4 py-3 rounded-xl font-steelfish uppercase tracking-wider text-lg transition-all ${activeTab === tab.key ? 'bg-accent text-white font-bold shadow-lg shadow-accent/25' : 'bg-transparent text-white/60 hover:bg-white/5 hover:text-white'}`}
             >
               <tab.icon className="h-4 w-4" /> {tab.label}
             </button>
           ))}
-          <button onClick={logout} className="text-left px-4 py-3 text-red-500 font-bold uppercase tracking-wider text-sm hover:bg-secondary rounded-sm mt-4">
+          <button onClick={logout} className="text-left px-4 py-3 text-red-400 font-steelfish uppercase tracking-wider text-lg hover:bg-white/5 rounded-xl mt-4">
             Logout
           </button>
         </div>
 
         {/* Content Area */}
-        <div className="flex-1 bg-secondary/30 rounded-lg border border-border p-6 md:p-8">
+        <div className="flex-1 luxury-card rounded-2xl border border-white/10 p-6 md:p-8">
           {loading ? <LoadingSpinner /> : (
             <>
               {activeTab === 'orders' && (
                 <div>
-                  <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-6">Order History</h2>
+                  <h2 className="font-steelfish text-3xl font-bold text-white uppercase tracking-wider mb-6">ORDER HISTORY</h2>
                   {orders.length > 0 ? (
                     <div className="space-y-4">
                       {orders.map((o) => (

@@ -82,8 +82,8 @@ const BlogPostDetailPage = () => {
               <ArrowLeft className="h-4 w-4" /> All Articles
             </Link>
           </div>
-          {post.category && <span className="section-eyebrow block mb-3">{post.category}</span>}
-          <h1 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2 mb-6 heading-balance">{post.title}</h1>
+          {post.category && <span className="font-steelfish text-base uppercase tracking-widest text-brand-blue font-bold block mb-2">{post.category}</span>}
+          <h1 className="font-steelfish text-4xl sm:text-6xl md:text-7xl font-bold uppercase text-white tracking-wide mt-2 mb-6 heading-balance">{post.title}</h1>
           <div className="flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
             {post.author && <span className="font-bold text-white/80">{post.author}</span>}
             <span className="flex items-center gap-1.5"><Calendar className="h-4 w-4" /> {new Date(post.publish_date || post.created).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>

@@ -124,56 +124,56 @@ const ExitIntentPopup = () => {
               {done ? (
                 <div className="py-4">
                   <CheckCircle className="h-10 w-10 text-accent mx-auto mb-3" />
-                  <h3 className="text-2xl font-black uppercase text-white tracking-tight mb-2">You're in.</h3>
-                  <p className="text-muted-foreground text-xs sm:text-sm mb-4">
+                  <h3 className="font-steelfish text-3xl font-bold uppercase text-white tracking-wide mb-2">YOU'RE IN THE SQUAD.</h3>
+                  <p className="text-white/70 text-xs sm:text-sm mb-4 font-sans">
                     Here is your exclusive <span className="text-accent font-bold">10% OFF</span> code for your order:
                   </p>
-                  <div className="flex items-center justify-between bg-black border border-accent/40 rounded-xl p-3 mb-4 max-w-xs mx-auto">
-                    <span className="font-mono text-base font-black tracking-widest text-accent">STRONGBUILD10</span>
+                  <div className="flex items-center justify-between bg-black border border-accent/50 rounded-xl p-3 mb-4 max-w-xs mx-auto">
+                    <span className="font-mono text-lg font-black tracking-widest text-accent">STRONG10</span>
                     <button
                       type="button"
                       onClick={() => {
-                        navigator.clipboard.writeText('STRONGBUILD10');
+                        navigator.clipboard.writeText('STRONG10');
                         setCopied(true);
                         toast.success('Discount code copied to clipboard!');
                         setTimeout(() => setCopied(false), 2500);
                       }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/20 hover:bg-accent/30 text-accent text-xs font-bold uppercase rounded-lg transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/20 hover:bg-accent/30 text-accent text-xs font-bold uppercase rounded-lg transition-colors font-sans"
                     >
                       {copied ? <><Check className="h-3.5 w-3.5" /> Copied</> : <><Copy className="h-3.5 w-3.5" /> Copy</>}
                     </button>
                   </div>
-                  <p className="text-[11px] text-muted-foreground">
-                    Apply this coupon during checkout on <strong className="text-white">strongbuild.in</strong>.
+                  <p className="text-[11px] text-white/50 font-sans">
+                    Use code at checkout for 10% off your competition gear.
                   </p>
                 </div>
               ) : (
                 <>
-                  <span className="section-eyebrow">Before you go</span>
-                  <h3 className="text-2xl md:text-3xl font-black uppercase text-white tracking-tight mt-2 mb-3 heading-balance">
-                    Get 10% Off Your First Belt
+                  <span className="font-steelfish text-sm uppercase tracking-widest text-accent font-bold">Before You Step Off the Platform</span>
+                  <h3 className="font-steelfish text-3xl md:text-4xl font-bold uppercase text-white tracking-wide mt-1 mb-2">
+                    GET 10% OFF YOUR FIRST GEAR
                   </h3>
-                  <p className="text-muted-foreground text-sm mb-6 max-w-sm mx-auto">
-                    Drop your email and we'll send a 10% off code plus meet-day training guides. No spam — just strength.
+                  <p className="text-white/60 text-xs sm:text-sm mb-6 max-w-sm mx-auto font-sans leading-relaxed">
+                    Join over 5,000+ lifters. Get instant 10% off on your first order plus priority dispatch access.
                   </p>
                   <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
                     <input
                       type="email"
                       required
-                      placeholder="you@email.com"
+                      placeholder="Enter your email address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full rounded-xl border border-white/10 px-4 py-3 text-white text-center"
+                      className="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-white text-center text-xs sm:text-sm font-sans"
                     />
                     <Button
                       type="submit"
                       disabled={loading}
-                      className="w-full bg-accent hover:bg-accent/90 text-white font-bold uppercase tracking-widest rounded-xl py-3 flex items-center justify-center gap-2"
+                      className="w-full bg-accent hover:bg-accent/90 text-white font-steelfish text-xl tracking-wider uppercase rounded-xl py-5 flex items-center justify-center gap-2 shadow-lg shadow-accent/30"
                     >
-                      {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Unlocking...</> : 'Unlock My 10% Off'}
+                      {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Unlocking...</> : 'UNLOCK MY 10% OFF'}
                     </Button>
                   </form>
-                  <button onClick={close} className="mt-4 text-xs text-muted-foreground hover:text-white/70 transition-colors">
+                  <button onClick={close} className="mt-4 text-[11px] text-white/40 hover:text-white transition-colors font-sans">
                     No thanks, I'll pay full price
                   </button>
                 </>

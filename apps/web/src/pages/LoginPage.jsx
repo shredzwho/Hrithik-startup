@@ -72,49 +72,49 @@ const LoginPage = () => {
         <title>{isSignup ? 'Create Account' : 'Login'} - STRONGBUILD</title>
         <meta name="description" content={isSignup ? 'Create your STRONGBUILD account to track orders, save your wishlist and earn loyalty points.' : 'Log in to your STRONGBUILD account.'} />
       </Helmet>
-      <div className="min-h-[80vh] flex items-center justify-center bg-background px-4 py-32">
-        <div className="max-w-md w-full luxury-card p-8 rounded-lg">
-          <h1 className="text-3xl font-black text-white uppercase tracking-tight mb-2 text-center">
-            {isSignup ? 'Create Account' : 'Login'}
+      <div className="min-h-[80vh] flex items-center justify-center bg-black px-4 py-32 sm:py-36">
+        <div className="max-w-md w-full luxury-card p-8 sm:p-10 rounded-2xl border border-white/10 shadow-2xl">
+          <h1 className="font-steelfish text-4xl sm:text-5xl font-bold text-white uppercase tracking-wider mb-2 text-center">
+            {isSignup ? 'CREATE ATHLETE ACCOUNT' : 'ATHLETE LOGIN'}
           </h1>
-          <p className="text-muted-foreground text-center mb-8">
-            {isSignup ? 'Join the ranks. Track orders, save gear, earn points.' : 'Access your orders, wishlist, and points.'}
+          <p className="text-white/60 text-xs sm:text-sm text-center mb-8 font-sans">
+            {isSignup ? 'Join the ranks. Track active shipments, save gear, earn points.' : 'Access your active orders, wishlist, and athlete profile.'}
           </p>
 
           {isSignup ? (
-            <form onSubmit={handleSignup} className="space-y-5">
+            <form onSubmit={handleSignup} className="space-y-4">
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Full Name</label>
-                <Input type="text" name="name" required value={form.name} onChange={handleChange} className="bg-black border-border focus-visible:ring-accent rounded-sm h-12" placeholder="Your name" />
+                <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-1.5 font-sans">Full Name</label>
+                <Input type="text" name="name" required value={form.name} onChange={handleChange} className="bg-black/60 border-white/15 focus-visible:ring-accent rounded-xl h-12 text-sm" placeholder="Your name" />
               </div>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Email</label>
-                <Input type="email" name="email" required value={form.email} onChange={handleChange} className="bg-black border-border focus-visible:ring-accent rounded-sm h-12" placeholder="you@email.com" />
+                <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-1.5 font-sans">Email</label>
+                <Input type="email" name="email" required value={form.email} onChange={handleChange} className="bg-black/60 border-white/15 focus-visible:ring-accent rounded-xl h-12 text-sm" placeholder="you@email.com" />
               </div>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Password</label>
-                <Input type="password" name="password" required value={form.password} onChange={handleChange} className="bg-black border-border focus-visible:ring-accent rounded-sm h-12" placeholder="Min 8 characters" />
+                <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-1.5 font-sans">Password</label>
+                <Input type="password" name="password" required value={form.password} onChange={handleChange} className="bg-black/60 border-white/15 focus-visible:ring-accent rounded-xl h-12 text-sm" placeholder="Min 8 characters" />
               </div>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Confirm Password</label>
-                <Input type="password" name="confirm" required value={form.confirm} onChange={handleChange} className="bg-black border-border focus-visible:ring-accent rounded-sm h-12" placeholder="Re-enter password" />
+                <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-1.5 font-sans">Confirm Password</label>
+                <Input type="password" name="confirm" required value={form.confirm} onChange={handleChange} className="bg-black/60 border-white/15 focus-visible:ring-accent rounded-xl h-12 text-sm" placeholder="Re-enter password" />
               </div>
-              <Button type="submit" disabled={loading} className="w-full h-12 bg-accent hover:bg-accent/90 text-white font-bold tracking-widest uppercase rounded-sm flex items-center justify-center gap-2">
-                {loading ? <><Loader2 className="h-5 w-5 animate-spin" /> Creating...</> : 'Create Account'}
+              <Button type="submit" disabled={loading} className="w-full h-12 bg-accent hover:bg-accent/90 text-white font-steelfish text-xl tracking-wider uppercase rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-accent/25">
+                {loading ? <><Loader2 className="h-5 w-5 animate-spin" /> Creating...</> : 'CREATE ACCOUNT'}
               </Button>
             </form>
           ) : (
-            <form onSubmit={handleLogin} className="space-y-6">
+            <form onSubmit={handleLogin} className="space-y-5">
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Email</label>
-                <Input type="email" name="email" required value={form.email} onChange={handleChange} className="bg-black border-border focus-visible:ring-accent rounded-sm h-12" />
+                <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-1.5 font-sans">Email Address</label>
+                <Input type="email" name="email" required value={form.email} onChange={handleChange} className="bg-black/60 border-white/15 focus-visible:ring-accent rounded-xl h-12 text-sm" />
               </div>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Password</label>
-                <Input type="password" name="password" required value={form.password} onChange={handleChange} className="bg-black border-border focus-visible:ring-accent rounded-sm h-12" />
+                <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-1.5 font-sans">Password</label>
+                <Input type="password" name="password" required value={form.password} onChange={handleChange} className="bg-black/60 border-white/15 focus-visible:ring-accent rounded-xl h-12 text-sm" />
               </div>
-              <Button type="submit" disabled={loading} className="w-full h-12 bg-accent hover:bg-accent/90 text-white font-bold tracking-widest uppercase rounded-sm flex items-center justify-center gap-2">
-                {loading ? <><Loader2 className="h-5 w-5 animate-spin" /> Logging in...</> : 'Sign In'}
+              <Button type="submit" disabled={loading} className="w-full h-12 bg-accent hover:bg-accent/90 text-white font-steelfish text-xl tracking-wider uppercase rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-accent/25">
+                {loading ? <><Loader2 className="h-5 w-5 animate-spin" /> Logging in...</> : 'SIGN IN'}
               </Button>
             </form>
           )}

@@ -93,11 +93,12 @@ const AffiliateProgram = () => {
       </Helmet>
       
       {/* Hero Section */}
-      <section className="bg-card py-24 border-b border-border pt-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10 pointer-events-none" />
+      <section className="bg-gradient-to-b from-[#0f0f0f] to-[#050505] py-24 border-b border-white/10 pt-36 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10 pointer-events-none" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20">
-          <h1 className="text-4xl md:text-6xl font-black uppercase text-foreground mb-6 heading-balance">Monetize Your Influence</h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto mb-8">Partner with STRONGBUILD. Promote premium gear. Earn aggressive commissions.</p>
+          <span className="font-steelfish text-base uppercase tracking-widest text-brand-blue font-bold block mb-2">Partner Division</span>
+          <h1 className="font-steelfish text-5xl md:text-7xl font-bold uppercase text-white mb-3 heading-balance">MONETIZE YOUR PLATFORM INFLUENCE</h1>
+          <p className="text-sm md:text-base text-white/70 max-w-2xl mx-auto mb-4 font-sans">Partner with STRONGBUILD. Promote competition-grade equipment. Earn aggressive commissions.</p>
         </div>
       </section>
 
@@ -106,28 +107,28 @@ const AffiliateProgram = () => {
 
         {/* Benefits Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <div className="luxury-card p-8 rounded-xl text-center">
-            <IndianRupee className="h-12 w-12 text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-black text-foreground uppercase mb-2">High Commissions</h3>
-            <p className="text-muted-foreground text-sm">Earn 15% on standard gear and 20% on premium bundles.</p>
+          <div className="luxury-card p-8 rounded-2xl text-center border border-white/10">
+            <IndianRupee className="h-10 w-10 text-accent mx-auto mb-4" />
+            <h3 className="font-steelfish text-2xl font-bold text-white uppercase mb-2">High Commissions</h3>
+            <p className="text-white/60 text-xs sm:text-sm font-sans">Earn 15% on standard gear and 20% on meet day bundles.</p>
           </div>
-          <div className="luxury-card p-8 rounded-xl text-center">
-            <LinkIcon className="h-12 w-12 text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-black text-foreground uppercase mb-2">30-Day Cookie</h3>
-            <p className="text-muted-foreground text-sm">Get credited for purchases made up to 30 days after the click.</p>
+          <div className="luxury-card p-8 rounded-2xl text-center border border-white/10">
+            <LinkIcon className="h-10 w-10 text-brand-blue mx-auto mb-4" />
+            <h3 className="font-steelfish text-2xl font-bold text-white uppercase mb-2">30-Day Cookie</h3>
+            <p className="text-white/60 text-xs sm:text-sm font-sans">Get credited for purchases made up to 30 days after the click.</p>
           </div>
-          <div className="luxury-card p-8 rounded-xl text-center">
-            <Users className="h-12 w-12 text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-black text-foreground uppercase mb-2">Dedicated Support</h3>
-            <p className="text-muted-foreground text-sm">Access marketing assets and a dedicated affiliate manager.</p>
+          <div className="luxury-card p-8 rounded-2xl text-center border border-white/10">
+            <Users className="h-10 w-10 text-accent mx-auto mb-4" />
+            <h3 className="font-steelfish text-2xl font-bold text-white uppercase mb-2">Direct Support</h3>
+            <p className="text-white/60 text-xs sm:text-sm font-sans">Access marketing creatives, banners, and a dedicated affiliate manager.</p>
           </div>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-12 mb-16">
           
           {/* Form */}
-          <div className="lg:col-span-8 luxury-card p-6 md:p-10 rounded-xl">
-            <h2 className="text-2xl font-black uppercase text-foreground mb-8 border-b border-border pb-4">Affiliate Application</h2>
+          <div className="lg:col-span-8 luxury-card p-6 md:p-10 rounded-2xl border border-white/10">
+            <h2 className="font-steelfish text-3xl sm:text-4xl font-bold uppercase text-white mb-8 border-b border-white/10 pb-4">AFFILIATE PARTNERSHIP APPLICATION</h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

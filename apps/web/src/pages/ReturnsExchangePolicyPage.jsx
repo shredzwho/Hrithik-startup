@@ -40,10 +40,11 @@ const ReturnsExchangePolicyPage = () => {
       </Helmet>
       
       {/* Hero Section */}
-      <section className="bg-muted py-24 border-b border-border pt-32">
+      <section className="bg-gradient-to-b from-[#0f0f0f] to-[#050505] py-24 border-b border-white/10 pt-36">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-black uppercase text-foreground mb-6 heading-balance">Returns & Exchanges</h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">We stand behind our gear. If it’s not the right fit, we’ll make it right.</p>
+          <span className="font-steelfish text-base uppercase tracking-widest text-brand-blue font-bold block mb-2">Confidence Guarantee</span>
+          <h1 className="font-steelfish text-5xl md:text-7xl font-bold uppercase text-white mb-3 heading-balance">RETURNS &amp; SIZING EXCHANGES</h1>
+          <p className="text-sm md:text-base text-white/70 max-w-2xl mx-auto font-sans">We stand 100% behind our competition gear. If the belt or wrap size isn’t the right fit, we make it right.</p>
         </div>
       </section>
 
@@ -52,20 +53,20 @@ const ReturnsExchangePolicyPage = () => {
 
         {/* Policy Highlights */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <div className="bg-card border border-border p-6 rounded-xl text-center">
-            <RotateCcw className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h3 className="font-bold text-foreground mb-2">30-Day Window</h3>
-            <p className="text-sm text-muted-foreground">Return or exchange items within 30 days of delivery.</p>
+          <div className="luxury-card border border-white/10 p-6 rounded-2xl text-center">
+            <RotateCcw className="h-10 w-10 text-brand-blue mx-auto mb-4" />
+            <h3 className="font-steelfish text-2xl font-bold text-white uppercase mb-1">30-Day Window</h3>
+            <p className="text-xs text-white/60 font-sans">Exchange unused items within 30 days of delivery.</p>
           </div>
-          <div className="bg-card border border-border p-6 rounded-xl text-center">
-            <ShieldCheck className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h3 className="font-bold text-foreground mb-2">Condition Guarantee</h3>
-            <p className="text-sm text-muted-foreground">Items must be unused, unchalked, and in original packaging.</p>
+          <div className="luxury-card border border-white/10 p-6 rounded-2xl text-center">
+            <ShieldCheck className="h-10 w-10 text-accent mx-auto mb-4" />
+            <h3 className="font-steelfish text-2xl font-bold text-white uppercase mb-1">2-Year Warranty</h3>
+            <p className="text-xs text-white/60 font-sans">Lever hardware and quad stitching coverage.</p>
           </div>
-          <div className="bg-card border border-border p-6 rounded-xl text-center">
-            <HelpCircle className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h3 className="font-bold text-foreground mb-2">Fast Processing</h3>
-            <p className="text-sm text-muted-foreground">Refunds issued within 5-7 days after inspection.</p>
+          <div className="luxury-card border border-white/10 p-6 rounded-2xl text-center">
+            <Mail className="h-10 w-10 text-brand-blue mx-auto mb-4" />
+            <h3 className="font-steelfish text-2xl font-bold text-white uppercase mb-1">Instant Support</h3>
+            <p className="text-xs text-white/60 font-sans">Direct WhatsApp assistance for sizing swaps.</p>
           </div>
         </div>
 

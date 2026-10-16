@@ -6,12 +6,12 @@ import pb from '@/lib/pocketbaseClient.js';
 import { toast } from 'sonner';
 
 const PageHeader = ({ title, subtitle, eyebrow }) => (
-  <div className="relative bg-[#0a0a0a] py-16 md:py-24 border-b border-white/10 text-center pt-32 overflow-hidden">
-    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(230,0,0,0.14),transparent_70%)] pointer-events-none" />
+  <div className="relative bg-gradient-to-b from-[#0f0f0f] to-[#050505] py-16 md:py-24 border-b border-white/10 text-center pt-32 sm:pt-36 overflow-hidden">
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,30,39,0.15),transparent_70%)] pointer-events-none" />
     <div className="relative max-w-3xl mx-auto px-4">
-      {eyebrow && <span className="section-eyebrow mb-3 inline-block">{eyebrow}</span>}
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-4 heading-balance">{title}</h1>
-      {subtitle && <p className="text-base md:text-lg text-white/70 font-light max-w-xl mx-auto">{subtitle}</p>}
+      {eyebrow && <span className="font-steelfish text-base uppercase tracking-widest text-brand-blue font-bold mb-2 inline-block">{eyebrow}</span>}
+      <h1 className="font-steelfish text-5xl sm:text-6xl md:text-7xl font-bold text-white uppercase tracking-tight mb-3 heading-balance">{title}</h1>
+      {subtitle && <p className="text-sm md:text-base text-white/70 font-sans max-w-xl mx-auto">{subtitle}</p>}
     </div>
   </div>
 );

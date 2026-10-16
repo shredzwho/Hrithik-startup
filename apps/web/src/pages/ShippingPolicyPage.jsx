@@ -38,10 +38,11 @@ const ShippingPolicyPage = () => {
       </Helmet>
       
       {/* Hero Section */}
-      <section className="bg-muted py-24 border-b border-border pt-32">
+      <section className="bg-gradient-to-b from-[#0f0f0f] to-[#050505] py-24 border-b border-white/10 pt-36">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-black uppercase text-foreground mb-6 heading-balance">Shipping & Delivery</h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">We process and dispatch gear with the same intensity you bring to the platform. Review our delivery standards below.</p>
+          <span className="font-steelfish text-base uppercase tracking-widest text-brand-blue font-bold block mb-2">Priority Fulfilment</span>
+          <h1 className="font-steelfish text-5xl md:text-7xl font-bold uppercase text-white mb-3 heading-balance">SHIPPING &amp; DISPATCH POLICY</h1>
+          <p className="text-sm md:text-base text-white/70 max-w-2xl mx-auto font-sans">We process and dispatch gear with the same intensity you bring to the platform. Dispatched same-day from Pune.</p>
         </div>
       </section>
 

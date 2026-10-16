@@ -32,11 +32,11 @@ const BlogPage = () => {
         <meta name="description" content="Iron Intel — training tips, lever belt and wrist wrap guides, meet-day peaking advice and powerlifting news from STRONGBUILD, India's premium strength gear brand." />
       </Helmet>
       
-      <div className="bg-[#0a0a0a] py-16 md:py-24 border-b border-white/10 text-center pt-32">
+      <div className="bg-gradient-to-b from-[#0f0f0f] to-[#050505] py-16 md:py-24 border-b border-white/10 text-center pt-32 sm:pt-36">
         <div className="max-w-3xl mx-auto px-4">
-          <span className="section-eyebrow block mb-3">Powerlifting Knowledge Hub</span>
-          <h1 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tight mb-4 heading-balance">Iron Intel</h1>
-          <p className="text-lg text-white/75 font-light max-w-xl mx-auto">Training tips, equipment guides, and competition-ready powerlifting advice.</p>
+          <span className="font-steelfish text-base uppercase tracking-widest text-brand-blue font-bold block mb-2">Powerlifting Knowledge Hub</span>
+          <h1 className="font-steelfish text-5xl sm:text-7xl font-bold text-white uppercase tracking-tight mb-3 heading-balance">IRON INTEL &amp; GUIDES</h1>
+          <p className="text-sm md:text-base text-white/70 font-sans max-w-xl mx-auto">Training techniques, equipment sizing breakdowns, and competition peaking strategies.</p>
         </div>
       </div>
 

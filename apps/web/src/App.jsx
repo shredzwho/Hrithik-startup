@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import { CartProvider } from '@/hooks/useCart.jsx';
@@ -35,6 +35,22 @@ import AdminDashboard from '@/pages/AdminDashboard.jsx';
 import CollectionsManager from '@/pages/CollectionsManager.jsx';
 import UserManagement from '@/pages/UserManagement.jsx';
 import AdminAccountSettings from '@/pages/AdminAccountSettings.jsx';
+import { initMetaPixel, trackPageView } from '@/lib/metaPixel.js';
+import { useLocation } from 'react-router-dom';
+
+function MetaPixelTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    initMetaPixel();
+  }, []);
+
+  useEffect(() => {
+    trackPageView();
+  }, [location.pathname, location.search]);
+
+  return null;
+}
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -45,6 +61,7 @@ function App() {
         <CartProvider>
           <Router>
             <ScrollToTop />
+            <MetaPixelTracker />
             <Routes>
               {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLoginPage />} />

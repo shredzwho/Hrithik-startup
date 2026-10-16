@@ -58,7 +58,7 @@ const MobileBottomNav = ({ setIsCartOpen }) => {
                     </span>
                   )}
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider">
+                <span className="font-steelfish text-xs uppercase tracking-wider">
                   {item.label}
                 </span>
               </button>
@@ -76,8 +76,8 @@ const MobileBottomNav = ({ setIsCartOpen }) => {
             >
               <Icon className="h-5 w-5 mb-0.5" />
               <span
-                className={`text-[10px] uppercase tracking-wider ${
-                  active ? 'font-black text-accent' : 'font-medium'
+                className={`font-steelfish text-xs uppercase tracking-wider ${
+                  active ? 'font-bold text-accent' : 'text-white/70'
                 }`}
               >
                 {item.label}

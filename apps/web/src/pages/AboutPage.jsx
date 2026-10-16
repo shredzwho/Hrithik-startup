@@ -2,53 +2,90 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { ShieldCheck, Award, Flame, ArrowRight } from 'lucide-react';
+import { TrustBadges } from '@/components/SharedComponents.jsx';
 
 const VALUES = [
-  { title: 'Competition first', desc: 'Every belt, wrap and strap is specced against tested-federation requirements before it ships.' },
-  { title: 'Materials that last', desc: 'Full-grain leather, reinforced stitching and steel hardware chosen for years of heavy use.' },
-  { title: 'Built with athletes', desc: 'Prototypes go to national-level lifters first. If it fails under load, it never reaches you.' },
+  { 
+    title: 'Competition Standard First', 
+    desc: 'Every lever belt, wrist wrap and strap is specced against IPF tested-federation requirements before it ever ships.',
+    icon: Award,
+    color: 'text-brand-blue'
+  },
+  { 
+    title: 'Materials That Never Fail', 
+    desc: 'Solid 100% steerhide leather, quad-core industrial stitching, and cast stainless steel lever buckles engineered for max poundages.',
+    icon: ShieldCheck,
+    color: 'text-accent'
+  },
+  { 
+    title: 'Platform Tested With Athletes', 
+    desc: 'Prototypes go directly to national champions first. If it bends, stretches, or slips under a 300kg deadlift, it is sent back to the drawing board.',
+    icon: Flame,
+    color: 'text-accent'
+  },
 ];
 
 const AboutPage = () => (
   <>
     <Helmet>
-      <title>About STRONGBUILD | Premium Strength Equipment from India</title>
-      <meta name="description" content="STRONGBUILD builds premium, competition-ready strength equipment for powerlifters, bodybuilders and strength athletes across India." />
+      <title>About STRONGBUILD | India's Premium Powerlifting Gear</title>
+      <meta name="description" content="STRONGBUILD engineers competition-grade powerlifting gear for serious lifters across India. 100% full-grain leather, stainless steel lever buckles, and IPF spec." />
     </Helmet>
 
-    <section className="relative pt-40 pb-24 overflow-hidden">
-      <img src="https://images.hostinger.com/cff56328-d1f3-44b4-966d-91953a987efe.png" alt="Lifter chalking up before a heavy pull" className="absolute inset-0 h-full w-full object-cover opacity-30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/80" />
+    <section className="relative pt-36 sm:pt-44 pb-20 sm:pb-28 overflow-hidden bg-black">
+      <img src="https://images.hostinger.com/cff56328-d1f3-44b4-966d-91953a987efe.png" alt="Lifter chalking up before a heavy pull" className="absolute inset-0 h-full w-full object-cover opacity-25 filter contrast-125" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/85" />
       <div className="relative max-w-4xl mx-auto px-4 text-center">
-        <span className="section-eyebrow">Our story</span>
-        <h1 className="text-4xl md:text-6xl font-black uppercase text-white tracking-tight mt-3 heading-balance">Gear worthy of the lift</h1>
-        <p className="text-lg text-white/70 mt-6">
-          STRONGBUILD exists to give Indian strength athletes equipment that matches their ambition — premium, competition-ready and honestly priced.
+        <span className="font-steelfish text-base uppercase tracking-widest text-brand-blue font-bold">The Origin Story</span>
+        <h1 className="font-steelfish text-5xl sm:text-7xl md:text-8xl font-bold uppercase text-white tracking-wide mt-2 heading-balance">
+          GEAR WORTHY OF THE HEAVIEST LIFTS
+        </h1>
+        <p className="text-base sm:text-lg text-white/75 mt-4 max-w-2xl mx-auto font-sans">
+          STRONGBUILD was founded in Pune to give Indian powerlifters and strength athletes equipment that matches their ambition — competition-grade, indestructible, and honestly priced.
         </p>
       </div>
     </section>
 
-    <section className="max-w-5xl mx-auto px-4 pb-20">
-      <div className="glass-panel rounded-3xl p-8 md:p-14 space-y-6 text-muted-foreground leading-relaxed">
-        <h2 className="text-2xl md:text-3xl font-black uppercase text-white tracking-tight">Our mission</h2>
-        <p>We build premium competition-ready strength equipment for powerlifters, bodybuilders and strength athletes. For years, serious lifters in India had two options: import gear at painful prices, or settle for equipment that tore, stretched or failed kit check. We started STRONGBUILD to close that gap.</p>
-        <p>Each product line begins on the platform, not in a catalogue. We measure what breaks, redesign the failure points, and only then put a product into production. That is why our lever belts carry a two-year hardware and stitching warranty, and why our wraps hold their stiffness through hundreds of sessions.</p>
-        <p>Strength, pride and honour are not slogans here — they are the standard we hold every batch to before it leaves the workshop.</p>
+    <section className="max-w-5xl mx-auto px-4 py-12 sm:py-16">
+      <div className="luxury-card rounded-3xl p-6 sm:p-12 space-y-6 text-white/70 leading-relaxed font-sans border border-white/10">
+        <span className="font-steelfish text-sm uppercase tracking-widest text-accent font-bold">Our Philosophy</span>
+        <h2 className="font-steelfish text-3xl sm:text-5xl font-bold uppercase text-white tracking-tight">
+          BUILT BY LIFTERS, FOR THE PLATFORM
+        </h2>
+        <p className="text-sm sm:text-base">
+          For years, serious powerlifters in India were forced to either pay extortionate import markups on foreign brands or settle for cheap commercial gym belts that split at the rivets, stretched out under heavy air, or failed federation kit check on meet morning.
+        </p>
+        <p className="text-sm sm:text-base">
+          We founded STRONGBUILD to obliterate that compromise. Each piece begins directly with national athletes and coaches. We engineer for maximum intra-abdominal bracing, uniform 10cm competition width, and cast stainless steel lever mechanisms that lock down like a bank vault.
+        </p>
+        <p className="text-sm sm:text-base">
+          Strength, Pride, and Honour are not empty marketing slogans here. They are the rigorous standards that every single belt, strap, and wrap must clear before being dispatched from our Pune facility.
+        </p>
       </div>
     </section>
 
-    <section className="max-w-7xl mx-auto px-4 pb-24 grid md:grid-cols-3 gap-6">
+    <section className="max-w-7xl mx-auto px-4 pb-20 sm:pb-24 grid md:grid-cols-3 gap-6">
       {VALUES.map(v => (
-        <div key={v.title} className="rounded-2xl border border-white/10 p-8 hover:border-red-600/40 transition-colors">
-          <h3 className="text-lg font-bold uppercase tracking-wider text-white mb-3">{v.title}</h3>
-          <p className="text-muted-foreground leading-relaxed">{v.desc}</p>
+        <div key={v.title} className="luxury-card rounded-2xl border border-white/10 p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div className="h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4">
+              <v.icon className={`h-6 w-6 ${v.color}`} />
+            </div>
+            <h3 className="font-steelfish text-2xl uppercase tracking-wider text-white font-bold mb-2">{v.title}</h3>
+            <p className="text-xs sm:text-sm text-white/60 leading-relaxed font-sans">{v.desc}</p>
+          </div>
         </div>
       ))}
     </section>
 
-    <section className="pb-28 text-center px-4">
+    <TrustBadges />
+
+    <section className="py-20 text-center px-4">
       <Link to="/shop">
-        <Button className="bg-accent hover:bg-accent/90 text-white font-bold uppercase tracking-widest px-10 py-6 rounded-xl">Shop the range</Button>
+        <Button className="bg-accent hover:bg-accent/90 text-white font-steelfish text-2xl uppercase tracking-wider px-12 py-7 rounded-xl shadow-xl shadow-accent/30 active:scale-95">
+          EXPLORE THE ARSENAL <ArrowRight className="h-5 w-5 ml-2" />
+        </Button>
       </Link>
     </section>
   </>

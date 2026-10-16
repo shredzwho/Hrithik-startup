@@ -113,8 +113,9 @@ const AthleteSponsorship = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16">
-          <h1 className="text-4xl md:text-6xl font-black uppercase text-foreground mb-6 heading-balance">Join the Elite</h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">We back champions who embody strength, pride, and honour. Apply to become a sponsored STRONGBUILD athlete.</p>
+          <span className="font-steelfish text-base uppercase tracking-widest text-brand-blue font-bold block mb-2">Division Roster</span>
+          <h1 className="font-steelfish text-5xl md:text-7xl font-bold uppercase text-white mb-3 heading-balance">JOIN THE STRONGBUILD ELITE</h1>
+          <p className="text-sm md:text-base text-white/70 max-w-2xl mx-auto font-sans">We back powerlifters and athletes who compete on the platform. Apply to become a sponsored STRONGBUILD athlete.</p>
         </div>
       </section>
 
@@ -123,29 +124,29 @@ const AthleteSponsorship = () => {
 
         {/* Benefits & Requirements */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-card border border-border p-8 rounded-xl">
-            <h3 className="text-2xl font-black text-foreground uppercase tracking-wide mb-4">The Armory</h3>
-            <ul className="space-y-4 text-muted-foreground">
-              <li className="flex items-start gap-3"><Medal className="h-5 w-5 text-primary shrink-0" /> Monthly free gear allowance</li>
-              <li className="flex items-start gap-3"><Medal className="h-5 w-5 text-primary shrink-0" /> Exclusive affiliate discount codes</li>
-              <li className="flex items-start gap-3"><Medal className="h-5 w-5 text-primary shrink-0" /> Early access to prototype equipment</li>
-              <li className="flex items-start gap-3"><Medal className="h-5 w-5 text-primary shrink-0" /> Co-branded content opportunities</li>
+          <div className="luxury-card border border-white/10 p-8 rounded-2xl">
+            <h3 className="font-steelfish text-3xl font-bold text-white uppercase tracking-wider mb-4">The Armory Allowance</h3>
+            <ul className="space-y-4 text-white/70 font-sans text-sm">
+              <li className="flex items-start gap-3"><Medal className="h-5 w-5 text-accent shrink-0" /> Monthly free competition gear allowance</li>
+              <li className="flex items-start gap-3"><Medal className="h-5 w-5 text-brand-blue shrink-0" /> Custom affiliate discount codes for followers</li>
+              <li className="flex items-start gap-3"><Medal className="h-5 w-5 text-accent shrink-0" /> Early prototype testing for unreleased gear</li>
+              <li className="flex items-start gap-3"><Medal className="h-5 w-5 text-brand-blue shrink-0" /> National meet media features & photo coverage</li>
             </ul>
           </div>
-          <div className="bg-muted border border-border p-8 rounded-xl">
-            <h3 className="text-2xl font-black text-foreground uppercase tracking-wide mb-4">Requirements</h3>
-            <ul className="space-y-4 text-muted-foreground">
-              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-accent shrink-0" /> Active competitor in strength sports</li>
-              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-accent shrink-0" /> Strong social media presence & engagement</li>
-              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-accent shrink-0" /> Alignment with brand values</li>
-              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-accent shrink-0" /> Minimum 18 years of age</li>
+          <div className="luxury-card border border-white/10 p-8 rounded-2xl">
+            <h3 className="font-steelfish text-3xl font-bold text-white uppercase tracking-wider mb-4">Athlete Criteria</h3>
+            <ul className="space-y-4 text-white/70 font-sans text-sm">
+              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-accent shrink-0" /> Active competitor in tested strength sports</li>
+              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-brand-blue shrink-0" /> Consistent training content & platform videos</li>
+              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-accent shrink-0" /> Alignment with Strength · Pride · Honour</li>
+              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-brand-blue shrink-0" /> Minimum 18 years of age</li>
             </ul>
           </div>
         </div>
 
         {/* Application Form */}
-        <div className="luxury-card p-6 md:p-10 rounded-xl">
-          <h2 className="text-3xl font-black uppercase text-foreground mb-8 text-center border-b border-border pb-6">Sponsorship Application</h2>
+        <div className="luxury-card p-6 md:p-10 rounded-2xl border border-white/10">
+          <h2 className="font-steelfish text-4xl font-bold uppercase text-white mb-8 text-center border-b border-white/10 pb-6">SPONSORSHIP APPLICATION</h2>
           
           <form onSubmit={handleSubmit} className="space-y-8">
             

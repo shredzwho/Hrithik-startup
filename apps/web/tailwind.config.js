@@ -60,6 +60,22 @@ module.exports = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        brand: {
+          red: "#FF1E27",
+          "red-glow": "rgba(255, 30, 39, 0.35)",
+          blue: "#1D70F7",
+          "blue-glow": "rgba(29, 112, 247, 0.35)",
+          black: "#000000",
+          card: "#0D0D0D",
+          surface: "#141414",
+          border: "#262626",
+          white: "#FFFFFF",
+        },
+      },
+      fontFamily: {
+        steelfish: ["Steelfish", "Bebas Neue", "Impact", "sans-serif-condensed", "sans-serif"],
+        display: ["Steelfish", "Bebas Neue", "Impact", "sans-serif"],
+        sans: ["Outfit", "system-ui", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
