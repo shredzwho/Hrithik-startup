@@ -32,6 +32,18 @@ const AthleteSponsorship = () => {
       e.target.value = "";
       return;
     }
+    const invalidFile = files.find(f => !['image/jpeg', 'image/png', 'image/webp'].includes(f.type));
+    if (invalidFile) {
+      toast.error("Only JPG, PNG and WEBP image formats are supported");
+      e.target.value = "";
+      return;
+    }
+    const oversizedFile = files.find(f => f.size > 5 * 1024 * 1024);
+    if (oversizedFile) {
+      toast.error("Each image must be 5MB or smaller");
+      e.target.value = "";
+      return;
+    }
     setPhotos(files);
   };
 
@@ -102,7 +114,7 @@ const AthleteSponsorship = () => {
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16">
           <h1 className="text-4xl md:text-6xl font-black uppercase text-foreground mb-6 heading-balance">Join the Elite</h1>
-          <p className="text-lg text-secondary max-w-2xl mx-auto">We back champions who embody strength, pride, and honour. Apply to become a sponsored STRONGBUILD athlete.</p>
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">We back champions who embody strength, pride, and honour. Apply to become a sponsored STRONGBUILD athlete.</p>
         </div>
       </section>
 
@@ -123,10 +135,10 @@ const AthleteSponsorship = () => {
           <div className="bg-muted border border-border p-8 rounded-xl">
             <h3 className="text-2xl font-black text-foreground uppercase tracking-wide mb-4">Requirements</h3>
             <ul className="space-y-4 text-muted-foreground">
-              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-secondary shrink-0" /> Active competitor in strength sports</li>
-              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-secondary shrink-0" /> Strong social media presence & engagement</li>
-              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-secondary shrink-0" /> Alignment with brand values</li>
-              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-secondary shrink-0" /> Minimum 18 years of age</li>
+              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-accent shrink-0" /> Active competitor in strength sports</li>
+              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-accent shrink-0" /> Strong social media presence & engagement</li>
+              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-accent shrink-0" /> Alignment with brand values</li>
+              <li className="flex items-start gap-3"><CheckCircle className="h-5 w-5 text-accent shrink-0" /> Minimum 18 years of age</li>
             </ul>
           </div>
         </div>
@@ -142,24 +154,24 @@ const AthleteSponsorship = () => {
               <h3 className="text-xl font-bold text-primary uppercase tracking-wider mb-4">Personal Intel</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Full Name *</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Full Name *</label>
                   <input type="text" name="name" required value={formData.name} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Email *</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Email *</label>
                   <input type="email" name="email" required value={formData.email} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Phone</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Phone</label>
                   <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-bold text-secondary mb-2 uppercase">Age</label>
+                    <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Age</label>
                     <input type="number" name="age" value={formData.age} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-secondary mb-2 uppercase">City/Country</label>
+                    <label className="block text-sm font-bold text-white/80 mb-2 uppercase">City/Country</label>
                     <input type="text" name="location" value={formData.location} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                   </div>
                 </div>
@@ -171,7 +183,7 @@ const AthleteSponsorship = () => {
               <h3 className="text-xl font-bold text-primary uppercase tracking-wider mb-4">Athletic Profile</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Discipline *</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Discipline *</label>
                   <select name="sport" required value={formData.sport} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary">
                     <option>Powerlifting</option>
                     <option>Weightlifting</option>
@@ -182,7 +194,7 @@ const AthleteSponsorship = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Competition Level *</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Competition Level *</label>
                   <select name="competition_level" required value={formData.competition_level} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary">
                     <option>Local / Regional</option>
                     <option>National</option>
@@ -191,7 +203,7 @@ const AthleteSponsorship = () => {
                 </div>
               </div>
 
-              <label className="block text-sm font-bold text-secondary mb-4 uppercase">Personal Records (Lbs/Kg)</label>
+              <label className="block text-sm font-bold text-white/80 mb-4 uppercase">Personal Records (Lbs/Kg)</label>
               <div className="grid grid-cols-3 gap-4 mb-6">
                 <div>
                   <input type="text" name="squat_pr" placeholder="Squat" value={formData.squat_pr} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
@@ -205,7 +217,7 @@ const AthleteSponsorship = () => {
               </div>
 
               <div className="mb-6">
-                <label className="block text-sm font-bold text-secondary mb-2 uppercase">Major Achievements / Titles</label>
+                <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Major Achievements / Titles</label>
                 <textarea name="achievements" rows="3" value={formData.achievements} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" placeholder="List your recent competition placements..."></textarea>
               </div>
             </div>
@@ -215,26 +227,26 @@ const AthleteSponsorship = () => {
               <h3 className="text-xl font-bold text-primary uppercase tracking-wider mb-4">Media Presence</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Instagram Handle</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Instagram Handle</label>
                   <input type="text" name="instagram" placeholder="@username" value={formData.instagram} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Total Followers (All Platforms)</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Total Followers (All Platforms)</label>
                   <input type="number" name="follower_count" placeholder="e.g. 15000" value={formData.follower_count} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                 </div>
               </div>
 
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Bio / About You</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Bio / About You</label>
                   <textarea name="bio" rows="3" value={formData.bio} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" placeholder="Tell us your story..."></textarea>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Why partner with STRONGBUILD?</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Why partner with STRONGBUILD?</label>
                   <textarea name="sponsorship_reason" rows="3" value={formData.sponsorship_reason} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" placeholder="What makes you a good fit for our brand?"></textarea>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">What gear are you currently using?</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">What gear are you currently using?</label>
                   <textarea name="equipment_used" rows="2" value={formData.equipment_used} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary"></textarea>
                 </div>
               </div>
@@ -244,10 +256,10 @@ const AthleteSponsorship = () => {
             <div className="pt-6 border-t border-border">
               <h3 className="text-xl font-bold text-primary uppercase tracking-wider mb-4">Media Uploads</h3>
               <div className="border-2 border-dashed border-border rounded-lg p-8 text-center bg-muted/50 hover:bg-muted transition-colors relative cursor-pointer group">
-                <input type="file" multiple accept="image/*,video/*" onChange={handleFileChange} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                <input type="file" multiple accept="image/jpeg,image/png,image/webp" onChange={handleFileChange} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
                 <ImageIcon className="h-10 w-10 text-secondary mx-auto mb-3 group-hover:text-primary transition-colors" />
-                <p className="text-foreground font-bold mb-1">Click to upload training photos/videos</p>
-                <p className="text-sm text-muted-foreground">Max 5 files. Up to 20MB total.</p>
+                <p className="text-foreground font-bold mb-1">Click to upload training photos</p>
+                <p className="text-sm text-muted-foreground">Max 5 images (JPG, PNG, WEBP). Up to 5MB each.</p>
                 {photos && photos.length > 0 && (
                   <div className="mt-4 text-sm text-primary font-bold">
                     {photos.length} file(s) selected

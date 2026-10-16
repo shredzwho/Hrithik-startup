@@ -50,7 +50,12 @@ const LoginPage = () => {
     }
     setLoading(true);
     try {
-      await signup({ name: form.name.trim(), email: form.email, password: form.password });
+      await signup({
+        name: form.name.trim(),
+        email: form.email,
+        password: form.password,
+        passwordConfirm: form.confirm,
+      });
       toast.success('Account created. Welcome to STRONGBUILD.');
       navigate(from, { replace: true });
     } catch (err) {

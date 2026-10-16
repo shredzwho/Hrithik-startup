@@ -22,6 +22,7 @@ import UserDashboard from '@/pages/UserDashboard.jsx';
 import BlogPage from '@/pages/BlogPage.jsx';
 import BlogPostDetailPage from '@/pages/BlogPostDetailPage.jsx';
 import AboutPage from '@/pages/AboutPage.jsx';
+import OrderSuccessPage from '@/pages/OrderSuccessPage.jsx';
 import { FAQPage, ContactPage, TrackOrderPage, LegalPage } from '@/pages/StaticPages.jsx';
 
 import ShippingPolicyPage from '@/pages/ShippingPolicyPage.jsx';
@@ -68,6 +69,7 @@ function App() {
                       <Route path="/login" element={<LoginPage />} />
                       <Route path="/signup" element={<LoginPage />} />
                       <Route path="/account" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
+                      <Route path="/success" element={<OrderSuccessPage />} />
                       
                       <Route path="/blog" element={<BlogPage />} />
                       <Route path="/blog/:slug" element={<BlogPostDetailPage />} />

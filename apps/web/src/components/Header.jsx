@@ -133,10 +133,10 @@ const Header = ({ setIsCartOpen }) => {
                   <p className="text-[11px] font-bold uppercase tracking-widest text-accent mb-3">Popular Gear</p>
                   <div className="grid grid-cols-2 gap-2">
                     {[
-                      { name: 'Lever Belts', path: '/shop' },
-                      { name: 'Wrist Wraps', path: '/shop' },
-                      { name: 'Liquid Chalk', path: '/shop' },
-                      { name: 'Bundles & Kits', path: '/shop' },
+                      { name: 'Lever Belts', path: '/shop?q=belt' },
+                      { name: 'Wrist Wraps', path: '/shop?q=wrap' },
+                      { name: 'Liquid Chalk', path: '/shop?q=chalk' },
+                      { name: 'Bundles & Kits', path: '/shop?q=kit' },
                     ].map((cat, i) => (
                       <Link
                         key={i}

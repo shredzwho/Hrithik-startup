@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="sbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E53E3E" />
+      <stop offset="100%" stop-color="#DD6B20" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A202C" />
+      <stop offset="100%" stop-color="#000000" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bgGrad)" stroke="#E53E3E" stroke-width="2" stroke-opacity="0.4"/>
+  <!-- Bold Stylized S for STRONGBUILD -->
+  <path d="M44 20 H24 C20 20 18 22 18 26 C18 30 21 32 26 33 L38 35 C43 36 46 38 46 43 C46 48 42 50 36 50 H18" 
+        fill="none" 
+        stroke="url(#sbGrad)" 
+        stroke-width="7" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+  <!-- Barbell accent notch -->
+  <circle cx="50" cy="14" r="3" fill="#E53E3E" />
+</svg>

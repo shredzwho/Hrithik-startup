@@ -20,7 +20,7 @@ onRecordAfterCreateSuccess((e) => {
       },
       to: [{ address: recipientEmail }],
       subject: "Order Confirmation #" + e.record.get("order_number"),
-      html: "<h1>Order Confirmed!</h1><p>Thank you for your order.</p><p><strong>Order Number:</strong> " + e.record.get("order_number") + "</p><p><strong>Total Amount:</strong> $" + e.record.get("total_amount") + "</p><p>We'll notify you when your order ships.</p>"
+      html: "<h1>Order Confirmed!</h1><p>Thank you for your order with STRONGBUILD.</p><p><strong>Order Number:</strong> " + e.record.get("order_number") + "</p><p><strong>Total Amount:</strong> ₹" + e.record.get("total_amount") + "</p><p>We'll notify you when your order ships.</p>"
     });
     $app.newMailClient().send(message);
   }

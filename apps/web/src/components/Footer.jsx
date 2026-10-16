@@ -48,9 +48,9 @@ const Footer = () => {
               Premium powerlifting equipment engineered for strength, pride, and honour. Built by lifters, for lifters.
             </p>
             <div className="flex gap-4">
-              <a href="https://www.instagram.com/strongbuild.shop" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors" aria-label="Instagram"><Instagram className="h-5 w-5" /></a>
-              <a href="https://www.youtube.com/@strongbuild.shop" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors" aria-label="YouTube"><Youtube className="h-5 w-5" /></a>
-              <a href="https://www.facebook.com/strongbuild.shop" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors" aria-label="Facebook"><Facebook className="h-5 w-5" /></a>
+              <a href="https://www.instagram.com/strongbuild.in" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors" aria-label="Instagram"><Instagram className="h-5 w-5" /></a>
+              <a href="https://www.youtube.com/@strongbuild.in" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors" aria-label="YouTube"><Youtube className="h-5 w-5" /></a>
+              <a href="https://www.facebook.com/strongbuild.in" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors" aria-label="Facebook"><Facebook className="h-5 w-5" /></a>
             </div>
           </div>
 

@@ -4,7 +4,7 @@ migrate((app) => {
   const record = new Record(collection);
   record.id = "cr1w4wvrxtj3e7c";
   record.set("email", "strongman.sg45@gmail.com");
-  record.setPassword("strongmansg45");
+  record.setPassword($os.getenv("PB_SEED_ADMIN_PASSWORD") || $security.randomString(32));
   try {
     return app.save(record);
   } catch (e) {

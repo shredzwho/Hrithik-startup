@@ -4,7 +4,9 @@ import Pocketbase from 'pocketbase';
 // in production, point to the live Hostinger Horizons PocketBase endpoint with full CORS support.
 const POCKETBASE_API_URL =
   import.meta.env.VITE_POCKETBASE_URL ||
-  (import.meta.env.DEV ? '/hcgi/platform' : 'https://strongbuild.shop/hcgi/platform');
+  (typeof window !== 'undefined'
+    ? `${window.location.origin}/hcgi/platform`
+    : 'https://strongbuild.in/hcgi/platform');
 
 const pocketbaseClient = new Pocketbase(POCKETBASE_API_URL);
 

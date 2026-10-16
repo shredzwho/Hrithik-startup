@@ -26,7 +26,7 @@ const ReturnsExchangePolicyPage = () => {
     { q: "Do I have to pay for return shipping?", a: "If you are returning an item due to a defect or our error, we cover the return shipping. For size exchanges or change of mind, the customer is responsible for return shipping costs." },
     { q: "How long does the refund process take?", a: "Once we receive and inspect your return, refunds are processed within 5-7 business days. It may take an additional 3-5 days for the funds to appear on your bank statement." },
     { q: "Can I return a custom embroidered belt?", a: "No. Custom orders, personalized items, and clearance/final sale products are non-returnable and non-refundable unless there is a manufacturing defect." },
-    { q: "What if my gear breaks or arrives damaged?", a: "If your gear is damaged upon arrival or fails due to a defect, please contact us immediately at support@strongbuild.com with photos of the issue. We will initiate a warranty claim." },
+    { q: "What if my gear breaks or arrives damaged?", a: "If your gear is damaged upon arrival or fails due to a defect, please contact us immediately at support@strongbuild.in with photos of the issue. We will initiate a warranty claim." },
     { q: "How do exchanges work?", a: "The fastest way to ensure you get what you want is to return the item you have, and once the return is accepted, make a separate purchase for the new item. Alternatively, contact support for a direct exchange process." },
     { q: "Can I return apparel that has been washed?", a: "No. Apparel must be unwashed, unworn, and have original tags attached to be eligible for a return." },
     { q: "What happens if my return is rejected?", a: "If an item is returned in unacceptable condition (e.g., chalk stains, sweat odors), we will reject the refund and ship the item back to you at your expense." }
@@ -43,7 +43,7 @@ const ReturnsExchangePolicyPage = () => {
       <section className="bg-muted py-24 border-b border-border pt-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-black uppercase text-foreground mb-6 heading-balance">Returns & Exchanges</h1>
-          <p className="text-lg text-secondary max-w-2xl mx-auto">We stand behind our gear. If it’s not the right fit, we’ll make it right.</p>
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">We stand behind our gear. If it’s not the right fit, we’ll make it right.</p>
         </div>
       </section>
 
@@ -77,7 +77,7 @@ const ReturnsExchangePolicyPage = () => {
               <div className="shrink-0 w-12 h-12 rounded-full bg-primary text-primary-foreground font-black text-xl flex items-center justify-center">1</div>
               <div>
                 <h3 className="text-xl font-bold text-foreground mb-2">Initiate the Request</h3>
-                <p className="text-muted-foreground">Email us at support@strongbuild.com with your order number, the item(s) you wish to return, and the reason for return. If damaged, attach photos.</p>
+                <p className="text-muted-foreground">Email us at support@strongbuild.in with your order number, the item(s) you wish to return, and the reason for return. If damaged, attach photos.</p>
               </div>
             </div>
             <div className="flex gap-6">
@@ -134,10 +134,10 @@ const ReturnsExchangePolicyPage = () => {
 
         {/* Contact Support */}
         <div className="text-center py-12 border-t border-border">
-          <Mail className="h-10 w-10 text-secondary mx-auto mb-4" />
+          <Mail className="h-10 w-10 text-accent mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-foreground mb-4">Still need help?</h2>
           <p className="text-muted-foreground mb-6">Our support team is ready to assist you with any return or exchange queries.</p>
-          <a href="mailto:support@strongbuild.com" className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground font-bold tracking-widest uppercase px-8 py-4 rounded-sm transition-all duration-300 active:scale-95">
+          <a href="mailto:support@strongbuild.in" className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground font-bold tracking-widest uppercase px-8 py-4 rounded-sm transition-all duration-300 active:scale-95">
             Contact Support
           </a>
         </div>

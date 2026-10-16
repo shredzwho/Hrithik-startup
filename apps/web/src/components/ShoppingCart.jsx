@@ -6,9 +6,12 @@ import { Button } from '@/components/ui/button';
 import { initializeCheckout } from '@/api/EcommerceApi';
 import { useToast } from '@/hooks/use-toast';
 
+import { useAuth } from '@/contexts/AuthContext.jsx';
+
 const ShoppingCart = ({ isCartOpen, setIsCartOpen }) => {
   const { toast } = useToast();
-  const { cartItems, removeFromCart, updateQuantity, getCartTotal, getCartTotalInCents, clearCart } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, getCartTotal, getCartTotalInCents } = useCart();
+  const { currentUser } = useAuth();
 
   const handleCheckout = useCallback(async () => {
     if (cartItems.length === 0) {
@@ -29,9 +32,19 @@ const ShoppingCart = ({ isCartOpen, setIsCartOpen }) => {
       const successUrl = `${window.location.origin}/success`;
       const cancelUrl = window.location.href;
 
-      const { url } = await initializeCheckout({ items, successUrl, cancelUrl });
+      const customer = currentUser?.id && currentUser?.email ? {
+        external_id: currentUser.id,
+        email: currentUser.email,
+      } : undefined;
 
-      clearCart();
+      const { url } = await initializeCheckout({
+        items,
+        successUrl,
+        cancelUrl,
+        customer,
+      });
+
+      // Redirect to secure payment gateway without prematurely wiping cart
       window.location.href = url;
     } catch (error) {
       toast({
@@ -40,7 +53,7 @@ const ShoppingCart = ({ isCartOpen, setIsCartOpen }) => {
         variant: 'destructive',
       });
     }
-  }, [cartItems, clearCart, toast]);
+  }, [cartItems, currentUser, toast]);
 
   const totalInCents = getCartTotalInCents ? getCartTotalInCents() : 0;
   const freeShippingThresholdInCents = 149900; // ₹1,499

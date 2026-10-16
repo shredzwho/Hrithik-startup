@@ -23,11 +23,11 @@ const UserDashboard = () => {
   const [wishlist, setWishlist] = useState([]);
   const [points, setPoints] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [settingsForm, setSettingsForm] = useState({ name: currentUser?.name || '', password: '', confirm: '' });
+  const [settingsForm, setSettingsForm] = useState({ name: currentUser?.name || '', currentPassword: '', password: '', confirm: '' });
   const [savingSettings, setSavingSettings] = useState(false);
 
   useEffect(() => {
-    setSettingsForm({ name: currentUser?.name || '', password: '', confirm: '' });
+    setSettingsForm({ name: currentUser?.name || '', currentPassword: '', password: '', confirm: '' });
   }, [currentUser]);
 
   const loadTab = async (tab) => {
@@ -70,6 +70,11 @@ const UserDashboard = () => {
     try {
       const update = { name: settingsForm.name.trim() };
       if (settingsForm.password) {
+        if (!settingsForm.currentPassword) {
+          toast.error('Please enter your current password to set a new password');
+          setSavingSettings(false);
+          return;
+        }
         if (settingsForm.password.length < 8) {
           toast.error('Password must be at least 8 characters');
           setSavingSettings(false);
@@ -80,14 +85,16 @@ const UserDashboard = () => {
           setSavingSettings(false);
           return;
         }
+        update.oldPassword = settingsForm.currentPassword;
         update.password = settingsForm.password;
-        update.oldPassword = settingsForm.password;
+        update.passwordConfirm = settingsForm.confirm;
       }
       await pb.collection('users').update(currentUser.id, update, { $autoCancel: false });
       toast.success('Settings updated');
-      setSettingsForm({ name: update.name, password: '', confirm: '' });
+      setSettingsForm({ name: update.name, currentPassword: '', password: '', confirm: '' });
     } catch (err) {
-      toast.error('Could not update settings');
+      const message = err?.response?.data?.oldPassword?.message || 'Could not update settings. Check current password.';
+      toast.error(message);
     } finally {
       setSavingSettings(false);
     }
@@ -103,10 +110,10 @@ const UserDashboard = () => {
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 
-      <div className="bg-secondary py-12 pt-32 border-b border-border/50">
+      <div className="bg-[#0a0a0a] py-12 pt-32 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-2">My Account</h1>
-          <p className="text-primary">Welcome back, {currentUser?.name || currentUser?.email}</p>
+          <p className="text-white/70">Welcome back, {currentUser?.name || currentUser?.email}</p>
         </div>
       </div>
 
@@ -227,6 +234,10 @@ const UserDashboard = () => {
                     <div>
                       <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Full Name</label>
                       <Input type="text" value={settingsForm.name} onChange={(e) => setSettingsForm((f) => ({ ...f, name: e.target.value }))} className="bg-black border-border focus-visible:ring-accent rounded-sm h-12" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Current Password</label>
+                      <Input type="password" value={settingsForm.currentPassword} onChange={(e) => setSettingsForm((f) => ({ ...f, currentPassword: e.target.value }))} placeholder="Required only if changing password" className="bg-black border-border focus-visible:ring-accent rounded-sm h-12" />
                     </div>
                     <div>
                       <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">New Password</label>

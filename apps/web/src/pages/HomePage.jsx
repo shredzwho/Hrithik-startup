@@ -243,7 +243,7 @@ const HomePage = () => {
               <span className="section-eyebrow">Bundle &amp; save</span>
               <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2 mb-4">The Meet Day Kit</h2>
               <p className="text-white/70 mb-8">Lever belt, wrist wraps, figure-8 straps and liquid chalk in one kit — priced up to 20% below buying separately, shipped in a STRONGBUILD belt bag.</p>
-              <Link to="https://strongbuild.shop/product/prod_01M1EP7XEWJQ1JX6HJJH7YJNTT">
+              <Link to="/product/prod_01M1EP7XEWJQ1JX6HJJH7YJNTT">
                 <Button className="bg-accent hover:bg-accent/90 text-white font-bold tracking-widest uppercase px-8 py-6 rounded-xl">Shop Bundles</Button>
               </Link>
             </div>
@@ -306,8 +306,8 @@ const HomePage = () => {
       <section className="py-16 bg-[#070707] border-y border-white/10 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between mb-8">
           <h2 className="text-2xl md:text-3xl font-black uppercase text-white tracking-tight">Follow the grind</h2>
-          <a href="https://www.instagram.com/strongbuild.shop" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-brand-blue font-bold uppercase tracking-wider text-sm">
-            <Instagram className="h-4 w-4" /> @strongbuild.shop
+          <a href="https://www.instagram.com/strongbuild.in" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-brand-blue font-bold uppercase tracking-wider text-sm">
+            <Instagram className="h-4 w-4" /> @strongbuild.in
           </a>
         </div>
         <div className="marquee-track gap-3">

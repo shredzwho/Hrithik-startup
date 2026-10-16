@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Gift, Loader2, CheckCircle } from 'lucide-react';
+import { X, Gift, Loader2, CheckCircle, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import pb from '@/lib/pocketbaseClient.js';
 import { toast } from 'sonner';
@@ -13,6 +13,7 @@ const ExitIntentPopup = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [copied, setCopied] = useState(false);
   const shownRef = useRef(false);
 
   useEffect(() => {
@@ -76,11 +77,11 @@ const ExitIntentPopup = () => {
         { $autoCancel: false },
       );
       setDone(true);
-      toast.success('Code unlocked — check your inbox for 10% off.');
+      toast.success('Code unlocked: Use STRONGBUILD10 at checkout.');
       try { localStorage.setItem(STORAGE_KEY, '1'); } catch (_) { /* ignore */ }
       setEmail('');
-      // Auto close after showing success
-      setTimeout(() => setOpen(false), 2600);
+      // Give enough time for lifter to copy the discount code
+      setTimeout(() => setOpen(false), 9000);
     } catch (err) {
       const msg = err?.response?.data?.email?.message || 'Could not subscribe. You may already be on the list.';
       toast.error(msg);
@@ -121,11 +122,29 @@ const ExitIntentPopup = () => {
               </div>
 
               {done ? (
-                <div className="py-6">
-                  <CheckCircle className="h-10 w-10 text-accent mx-auto mb-4" />
+                <div className="py-4">
+                  <CheckCircle className="h-10 w-10 text-accent mx-auto mb-3" />
                   <h3 className="text-2xl font-black uppercase text-white tracking-tight mb-2">You're in.</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Your <span className="text-accent font-bold">10% off</span> code is on its way to your inbox. Use it on your first order.
+                  <p className="text-muted-foreground text-xs sm:text-sm mb-4">
+                    Here is your exclusive <span className="text-accent font-bold">10% OFF</span> code for your order:
+                  </p>
+                  <div className="flex items-center justify-between bg-black border border-accent/40 rounded-xl p-3 mb-4 max-w-xs mx-auto">
+                    <span className="font-mono text-base font-black tracking-widest text-accent">STRONGBUILD10</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText('STRONGBUILD10');
+                        setCopied(true);
+                        toast.success('Discount code copied to clipboard!');
+                        setTimeout(() => setCopied(false), 2500);
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/20 hover:bg-accent/30 text-accent text-xs font-bold uppercase rounded-lg transition-colors"
+                    >
+                      {copied ? <><Check className="h-3.5 w-3.5" /> Copied</> : <><Copy className="h-3.5 w-3.5" /> Copy</>}
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground">
+                    Apply this coupon during checkout on <strong className="text-white">strongbuild.in</strong>.
                   </p>
                 </div>
               ) : (

@@ -1,24 +1,34 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
+import { useSearchParams } from 'react-router-dom';
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { ProductCard, LoadingSpinner } from '@/components/SharedComponents.jsx';
 import { getProducts, getCategories } from '@/api/EcommerceApi.js';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const priceOf = (p) => {
-  const v = p.variants?.[0];
-  return v?.sale_price ?? v?.price ?? 0;
+  const v = p?.variants?.[0];
+  const cents = v?.sale_price_in_cents ?? v?.price_in_cents ?? p?.price_in_cents ?? 0;
+  return cents / 100;
 };
 
 const ShopPage = () => {
+  const [searchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState(searchParams.get('category') || 'all');
   const [sort, setSort] = useState('featured');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(searchParams.get('q') || '');
   const [maxPrice, setMaxPrice] = useState(0);
   const [priceCap, setPriceCap] = useState(0);
+
+  useEffect(() => {
+    const urlCategory = searchParams.get('category');
+    if (urlCategory) setCategory(urlCategory);
+    const urlQuery = searchParams.get('q');
+    if (urlQuery !== null && urlQuery !== undefined) setQuery(urlQuery);
+  }, [searchParams]);
 
   useEffect(() => {
     getCategories().then(res => setCategories(res.categories || [])).catch(console.error);
@@ -30,9 +40,9 @@ const ShopPage = () => {
       .then(res => {
         const list = res.products || [];
         setProducts(list);
-        const max = Math.ceil(Math.max(0, ...list.map(priceOf)) / 100) * 100 || 100;
-        setMaxPrice(max);
-        setPriceCap(max);
+        const calculatedMax = Math.ceil(Math.max(0, ...list.map(priceOf)) / 100) * 100 || 10000;
+        setMaxPrice(calculatedMax);
+        setPriceCap(calculatedMax);
       })
       .catch(console.error)
       .finally(() => setLoading(false));

@@ -69,10 +69,16 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (data) => {
     try {
-      const record = await pb.collection('users').create({
-        ...data,
+      const sanitizedData = {
+        email: data.email,
+        password: data.password,
+        passwordConfirm: data.passwordConfirm || data.password,
+        name: data.name?.trim() || '',
+        role: 'user',
         emailVisibility: true,
-      }, { $autoCancel: false });
+      };
+
+      const record = await pb.collection('users').create(sanitizedData, { $autoCancel: false });
       
       // Auto login after signup
       if (record) {

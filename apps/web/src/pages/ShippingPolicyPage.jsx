@@ -41,7 +41,7 @@ const ShippingPolicyPage = () => {
       <section className="bg-muted py-24 border-b border-border pt-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-black uppercase text-foreground mb-6 heading-balance">Shipping & Delivery</h1>
-          <p className="text-lg text-secondary max-w-2xl mx-auto">We process and dispatch gear with the same intensity you bring to the platform. Review our delivery standards below.</p>
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">We process and dispatch gear with the same intensity you bring to the platform. Review our delivery standards below.</p>
         </div>
       </section>
 

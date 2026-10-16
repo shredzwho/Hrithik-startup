@@ -5,11 +5,13 @@ import { CheckCircle, Loader2, Search, Package, Truck, CheckCircle2 } from 'luci
 import pb from '@/lib/pocketbaseClient.js';
 import { toast } from 'sonner';
 
-const PageHeader = ({ title, subtitle }) => (
-  <div className="bg-secondary py-16 md:py-24 border-b border-border/50 text-center pt-32">
-    <div className="max-w-3xl mx-auto px-4">
-      <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight mb-4 heading-balance">{title}</h1>
-      {subtitle && <p className="text-lg text-primary">{subtitle}</p>}
+const PageHeader = ({ title, subtitle, eyebrow }) => (
+  <div className="relative bg-[#0a0a0a] py-16 md:py-24 border-b border-white/10 text-center pt-32 overflow-hidden">
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(230,0,0,0.14),transparent_70%)] pointer-events-none" />
+    <div className="relative max-w-3xl mx-auto px-4">
+      {eyebrow && <span className="section-eyebrow mb-3 inline-block">{eyebrow}</span>}
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-4 heading-balance">{title}</h1>
+      {subtitle && <p className="text-base md:text-lg text-white/70 font-light max-w-xl mx-auto">{subtitle}</p>}
     </div>
   </div>
 );
@@ -38,18 +40,71 @@ export const FAQPage = () => {
         <title>FAQ - STRONGBUILD</title>
         <meta name="description" content="Answers to common questions about STRONGBUILD powerlifting gear, shipping, returns, warranties and sizing." />
       </Helmet>
-      <PageHeader title="Frequently Asked Questions" subtitle="Everything you need to know before you lift." />
-      <div className="max-w-4xl mx-auto px-4 py-16">
-        <div className="divide-y divide-white/10 border-y border-white/10">
-          {FAQ_DATA.map((f, i) => (
-            <div key={f.q}>
-              <button onClick={() => setOpen(open === i ? -1 : i)} className="w-full flex items-center justify-between gap-6 py-6 text-left">
-                <span className="font-semibold text-white">{f.q}</span>
-                <span className={`text-accent text-2xl shrink-0 transition-transform ${open === i ? 'rotate-45' : ''}`}>+</span>
-              </button>
-              {open === i && <p className="text-muted-foreground pb-6 leading-relaxed">{f.a}</p>}
-            </div>
-          ))}
+      <PageHeader
+        eyebrow="Help & Knowledge Base"
+        title="Frequently Asked Questions"
+        subtitle="Everything you need to know before you lift."
+      />
+      <div className="max-w-4xl mx-auto px-4 py-16 sm:py-20">
+        <div className="space-y-3">
+          {FAQ_DATA.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div
+                key={f.q}
+                className={`rounded-xl border transition-all duration-200 overflow-hidden ${
+                  isOpen
+                    ? 'bg-white/[0.04] border-white/20 shadow-lg shadow-black/40'
+                    : 'bg-white/[0.02] border-white/10 hover:border-white/20'
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? -1 : i)}
+                  className="w-full flex items-center justify-between gap-6 p-6 text-left"
+                >
+                  <span className="font-bold text-white text-base sm:text-lg">{f.q}</span>
+                  <span
+                    className={`text-accent text-2xl font-light shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-45' : ''
+                    }`}
+                  >
+                    +
+                  </span>
+                </button>
+                {isOpen && (
+                  <div className="px-6 pb-6 pt-0 text-muted-foreground leading-relaxed border-t border-white/5 pt-4">
+                    {f.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Contact Reassurance Banner */}
+        <div className="mt-16 glass-panel rounded-2xl p-8 sm:p-10 text-center border border-white/10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-accent/5 pointer-events-none" />
+          <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight mb-2">Still Have Questions?</h3>
+          <p className="text-white/70 max-w-lg mx-auto mb-6 text-sm sm:text-base">
+            Can’t find the answer you’re looking for? Reach out directly to our athlete support team.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              to="/contact"
+              className="px-6 py-3 rounded-lg bg-accent text-white font-bold uppercase tracking-wider text-sm hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+            >
+              Contact Support
+            </Link>
+            <a
+              href="https://wa.me/918317339439"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-lg bg-white/10 text-white font-bold uppercase tracking-wider text-sm hover:bg-white/15 transition-all border border-white/10"
+            >
+              WhatsApp Us
+            </a>
+          </div>
         </div>
       </div>
     </>
@@ -86,15 +141,19 @@ export const ContactPage = () => {
         <title>Contact Us - STRONGBUILD</title>
         <meta name="description" content="Get in touch with the STRONGBUILD team for product, order and sponsorship enquiries." />
       </Helmet>
-      <PageHeader title="Contact Us" subtitle="We are here to help you lift heavier." />
+      <PageHeader
+        eyebrow="Athlete Support"
+        title="Contact Us"
+        subtitle="We are here to help you lift heavier."
+      />
       <Container>
         <div className="grid md:grid-cols-2 gap-12">
           <div>
             <h2 className="text-2xl font-bold text-white mb-6">Get in Touch</h2>
-            <p className="mb-2"><strong className="text-white">Email:</strong> support@strongbuild.shop</p>
-            <p className="mb-2"><strong className="text-white">Phone / WhatsApp:</strong> +91 8317339439</p>
+            <p className="mb-2"><strong className="text-white">Email:</strong> <a href="mailto:support@strongbuild.in" className="hover:text-white transition-colors">support@strongbuild.in</a></p>
+            <p className="mb-2"><strong className="text-white">Phone / WhatsApp:</strong> <a href="https://wa.me/918317339439" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">+91 8317339439</a></p>
             <p className="mb-2"><strong className="text-white">Hours:</strong> Mon-Sat, 10am - 7pm IST</p>
-            <p className="mb-6"><strong className="text-white">Instagram:</strong> <a href="https://www.instagram.com/strongbuild.shop" target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">@strongbuild.shop</a></p>
+            <p className="mb-6"><strong className="text-white">Instagram:</strong> <a href="https://www.instagram.com/strongbuild.in" target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">@strongbuild.in</a></p>
             <div className="glass-panel rounded-xl p-5 text-sm">
               <p className="text-white font-bold uppercase tracking-wider mb-1">Dispatch & Returns</p>
               <p>STRONGBUILD Fulfilment Centre<br />Pune, Maharashtra 411001<br />India</p>
@@ -111,18 +170,46 @@ export const ContactPage = () => {
           ) : (
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Name</label>
-                <input type="text" name="name" required value={form.name} onChange={handleChange} className="w-full p-3 rounded-sm bg-secondary border border-border text-white" />
+                <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-2">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="Your full name"
+                  value={form.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3.5 rounded-lg bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none text-white placeholder-white/30 text-sm transition-colors"
+                />
               </div>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Email</label>
-                <input type="email" name="email" required value={form.email} onChange={handleChange} className="w-full p-3 rounded-sm bg-secondary border border-border text-white" />
+                <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-2">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="you@domain.com"
+                  value={form.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3.5 rounded-lg bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none text-white placeholder-white/30 text-sm transition-colors"
+                />
               </div>
               <div>
-                <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Message</label>
-                <textarea name="message" rows="5" required value={form.message} onChange={handleChange} className="w-full p-3 rounded-sm bg-secondary border border-border text-white"></textarea>
+                <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-2">Message</label>
+                <textarea
+                  name="message"
+                  rows="5"
+                  required
+                  placeholder="How can we help you?"
+                  value={form.message}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3.5 rounded-lg bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none text-white placeholder-white/30 text-sm transition-colors"
+                ></textarea>
               </div>
-              <button type="submit" disabled={loading} className="bg-accent text-white font-bold uppercase tracking-wider px-6 py-3 rounded-sm w-full hover:bg-accent/90 flex items-center justify-center gap-2 disabled:opacity-50">
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-accent text-white font-bold uppercase tracking-wider px-6 py-3.5 rounded-lg w-full hover:bg-accent/90 transition-colors shadow-lg shadow-accent/20 flex items-center justify-center gap-2 disabled:opacity-50"
+              >
                 {loading ? <><Loader2 className="h-5 w-5 animate-spin" /> Sending...</> : 'Send Message'}
               </button>
             </form>
@@ -191,19 +278,43 @@ export const TrackOrderPage = () => {
         <title>Track Order - STRONGBUILD</title>
         <meta name="description" content="Track the status of your STRONGBUILD order from placement to delivery." />
       </Helmet>
-      <PageHeader title="Track Your Order" subtitle="Follow your gear from dispatch to doorstep." />
+      <PageHeader
+        eyebrow="Fulfilment Status"
+        title="Track Your Order"
+        subtitle="Follow your gear from dispatch to doorstep."
+      />
       <Container>
         <div className="max-w-xl mx-auto">
           <form className="space-y-4 glass-panel rounded-xl p-8" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Order Number</label>
-              <input type="text" name="order_number" required placeholder="e.g. ORD-12345" value={form.order_number} onChange={handleChange} className="w-full p-3 rounded-sm bg-black border border-border text-white" />
+              <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-2">Order Number</label>
+              <input
+                type="text"
+                name="order_number"
+                required
+                placeholder="e.g. ORD-12345"
+                value={form.order_number}
+                onChange={handleChange}
+                className="w-full px-4 py-3.5 rounded-lg bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none text-white placeholder-white/30 text-sm transition-colors"
+              />
             </div>
             <div>
-              <label className="block text-sm font-bold uppercase tracking-wider text-primary mb-2">Email Address</label>
-              <input type="email" name="email" required placeholder="Email used at checkout" value={form.email} onChange={handleChange} className="w-full p-3 rounded-sm bg-black border border-border text-white" />
+              <label className="block text-xs font-bold uppercase tracking-wider text-white/80 mb-2">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="Email used at checkout"
+                value={form.email}
+                onChange={handleChange}
+                className="w-full px-4 py-3.5 rounded-lg bg-black/60 border border-white/15 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none text-white placeholder-white/30 text-sm transition-colors"
+              />
             </div>
-            <button type="submit" disabled={loading} className="bg-accent text-white font-bold uppercase tracking-wider px-6 py-3 rounded-sm w-full hover:bg-accent/90 flex items-center justify-center gap-2 disabled:opacity-50">
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-accent text-white font-bold uppercase tracking-wider px-6 py-3.5 rounded-lg w-full hover:bg-accent/90 transition-colors shadow-lg shadow-accent/20 flex items-center justify-center gap-2 disabled:opacity-50"
+            >
               {loading ? <><Loader2 className="h-5 w-5 animate-spin" /> Tracking...</> : <><Search className="h-5 w-5" /> Track Order</>}
             </button>
           </form>
@@ -232,7 +343,7 @@ export const TrackOrderPage = () => {
                     {i < STATUS_STEPS.length - 1 && (
                       <div className={`absolute top-5 left-1/2 w-full h-0.5 ${i <= statusIndex ? 'bg-accent' : 'bg-white/10'}`} />
                     )}
-                    <div className={`relative z-10 h-10 w-10 rounded-full flex items-center justify-center border-2 ${i <= statusIndex ? 'bg-accent border-accent text-white' : 'bg-secondary border-white/10 text-muted-foreground'}`}>
+                    <div className={`relative z-10 h-10 w-10 rounded-full flex items-center justify-center border-2 ${i <= statusIndex ? 'bg-accent border-accent text-white' : 'bg-white/5 border-white/10 text-muted-foreground'}`}>
                       <step.icon className="h-5 w-5" />
                     </div>
                     <span className={`text-xs mt-2 text-center ${i <= statusIndex ? 'text-white font-bold' : 'text-muted-foreground'}`}>{step.label}</span>
@@ -256,8 +367,8 @@ export const TrackOrderPage = () => {
 /* ---------------- Legal ---------------- */
 const PRIVACY_CONTENT = (
   <>
-    <p>STRONGBUILD ("we", "us", "our") operates strongbuild.shop and is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store and protect your personal information when you visit our website or purchase our powerlifting equipment.</p>
-    <p>Last updated: September 2026.</p>
+    <p>STRONGBUILD ("we", "us", "our") operates strongbuild.in and is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store and protect your personal information when you visit our website or purchase our powerlifting equipment.</p>
+    <p>Last updated: October 2026.</p>
 
     <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Information We Collect</h2>
     <p>We collect information you provide directly to us, such as your name, email address, phone number, shipping address and payment details when you create an account, place an order, subscribe to our newsletter, or contact our support team. We also automatically collect browsing data including IP address, browser type, pages visited and time spent on the site through cookies and similar technologies.</p>
@@ -282,7 +393,7 @@ const PRIVACY_CONTENT = (
     <p>We use industry-standard security measures including SSL encryption to protect your personal information. Payment details are processed through PCI-DSS compliant gateways and are never stored on our servers. While we strive to protect your data, no method of transmission over the internet is completely secure.</p>
 
     <h2 className="text-2xl font-bold text-white mt-8 mb-4">6. Your Rights</h2>
-    <p>You have the right to access, correct, update or delete your personal information. You may also opt out of marketing communications at any time using the unsubscribe link in our emails. To exercise these rights, contact us at support@strongbuild.shop.</p>
+    <p>You have the right to access, correct, update or delete your personal information. You may also opt out of marketing communications at any time using the unsubscribe link in our emails. To exercise these rights, contact us at support@strongbuild.in.</p>
 
     <h2 className="text-2xl font-bold text-white mt-8 mb-4">7. Children's Privacy</h2>
     <p>Our website is not intended for individuals under the age of 18. We do not knowingly collect personal information from children. If you believe we have collected such data, please contact us so we can delete it.</p>
@@ -293,7 +404,7 @@ const PRIVACY_CONTENT = (
     <h2 className="text-2xl font-bold text-white mt-8 mb-4">9. Contact Us</h2>
     <p>If you have any questions about this Privacy Policy, please contact us at:<br />
     STRONGBUILD<br />
-    Email: support@strongbuild.shop<br />
+    Email: support@strongbuild.in<br />
     Phone: +91 8317339439<br />
     Pune, Maharashtra, India</p>
   </>
@@ -301,8 +412,8 @@ const PRIVACY_CONTENT = (
 
 const TERMS_CONTENT = (
   <>
-    <p>Welcome to STRONGBUILD. These Terms & Conditions govern your use of strongbuild.shop and the purchase of products from our store. By accessing our website or placing an order, you agree to these terms.</p>
-    <p>Last updated: September 2026.</p>
+    <p>Welcome to STRONGBUILD. These Terms & Conditions govern your use of strongbuild.in and the purchase of products from our store. By accessing our website or placing an order, you agree to these terms.</p>
+    <p>Last updated: October 2026.</p>
 
     <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Use of Our Website</h2>
     <p>You agree to use our website only for lawful purposes and in a manner that does not infringe the rights of, or restrict the use of, this site by any third party. You must not misuse our site by knowingly introducing viruses, trojans or other malicious code, or attempting to gain unauthorised access to our systems.</p>
@@ -340,7 +451,7 @@ const TERMS_CONTENT = (
     <h2 className="text-2xl font-bold text-white mt-8 mb-4">12. Contact</h2>
     <p>For any questions about these Terms, please contact us at:<br />
     STRONGBUILD<br />
-    Email: support@strongbuild.shop<br />
+    Email: support@strongbuild.in<br />
     Phone: +91 8317339439<br />
     Pune, Maharashtra, India</p>
   </>

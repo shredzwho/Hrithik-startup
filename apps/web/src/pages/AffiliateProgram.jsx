@@ -97,7 +97,7 @@ const AffiliateProgram = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10 pointer-events-none" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20">
           <h1 className="text-4xl md:text-6xl font-black uppercase text-foreground mb-6 heading-balance">Monetize Your Influence</h1>
-          <p className="text-lg text-secondary max-w-2xl mx-auto mb-8">Partner with STRONGBUILD. Promote premium gear. Earn aggressive commissions.</p>
+          <p className="text-lg text-white/70 max-w-2xl mx-auto mb-8">Partner with STRONGBUILD. Promote premium gear. Earn aggressive commissions.</p>
         </div>
       </section>
 
@@ -132,29 +132,29 @@ const AffiliateProgram = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Full Name *</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Full Name *</label>
                   <input type="text" name="name" required value={formData.name} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Email *</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Email *</label>
                   <input type="email" name="email" required value={formData.email} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Phone Number</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Phone Number</label>
                   <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Website / Blog URL</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Website / Blog URL</label>
                   <input type="url" name="website" placeholder="https://" value={formData.website} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Primary Content Niche *</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Primary Content Niche *</label>
                   <select name="niche" required value={formData.niche} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary">
                     <option>Powerlifting</option>
                     <option>General Fitness</option>
@@ -164,23 +164,23 @@ const AffiliateProgram = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-secondary mb-2 uppercase">Total Audience Size</label>
+                  <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Total Audience Size</label>
                   <input type="number" name="follower_count" placeholder="e.g. 50000" value={formData.follower_count} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-secondary mb-2 uppercase">Social Media Handles</label>
+                <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Social Media Handles</label>
                 <input type="text" name="instagram" placeholder="IG / YouTube / TikTok (@handles)" value={formData.instagram} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" />
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-secondary mb-2 uppercase">How will you promote STRONGBUILD? *</label>
+                <label className="block text-sm font-bold text-white/80 mb-2 uppercase">How will you promote STRONGBUILD? *</label>
                 <textarea name="promotion_method" required rows="3" value={formData.promotion_method} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary" placeholder="e.g., YouTube gear reviews, Instagram reels, blog posts..."></textarea>
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-secondary mb-2 uppercase">Why join our program?</label>
+                <label className="block text-sm font-bold text-white/80 mb-2 uppercase">Why join our program?</label>
                 <textarea name="why_join" rows="2" value={formData.why_join} onChange={handleInputChange} className="w-full p-3 rounded-sm border border-border focus:border-primary"></textarea>
               </div>
 

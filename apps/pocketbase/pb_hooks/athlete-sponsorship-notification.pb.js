@@ -6,8 +6,8 @@ onRecordAfterCreateSuccess((e) => {
       address: $app.settings().meta.senderAddress,
       name: "Athlete Sponsorship"
     },
-    to: [{ address: "admin@site.com" }],
-    subject: "New Athlete Sponsorship Application",
+    to: [{ address: $os.getenv("ADMIN_NOTIFICATION_EMAIL") || "support@strongbuild.in" }],
+    subject: "New Athlete Sponsorship Application - STRONGBUILD",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background-color: #dc2626; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
@@ -43,7 +43,7 @@ onRecordAfterCreateSuccess((e) => {
           <p><strong>Achievements:</strong> ${e.record.get("achievements") || "N/A"}</p>
           
           <div style="text-align: center; margin-top: 30px;">
-            <a href="https://yoursite.com/admin/athlete-applications" style="background-color: #dc2626; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">Review Application</a>
+            <a href="https://strongbuild.in/admin" style="background-color: #dc2626; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">Review in Admin Panel</a>
           </div>
         </div>
       </div>

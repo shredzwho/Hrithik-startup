@@ -44,6 +44,7 @@ const AdminAccountSettings = () => {
       
       // Update password
       await pb.collection('users').update(currentAdmin.id, {
+        oldPassword: currentPassword,
         password: newPassword,
         passwordConfirm: confirmPassword
       }, { $autoCancel: false });
