@@ -35,7 +35,7 @@ const MobileBottomNav = ({ setIsCartOpen }) => {
   }
 
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-black/95 backdrop-blur-xl border-t border-white/10 px-2 py-1 shadow-2xl safe-area-pb">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-black/95 backdrop-blur-xl border-t border-white/10 px-2 py-1 shadow-2xl safe-area-pb">
       <nav className="flex items-center justify-around h-14 max-w-md mx-auto">
         {navItems.map((item, idx) => {
           const Icon = item.icon;
